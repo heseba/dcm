@@ -1,0 +1,750 @@
+{
+  "GoFiles": [
+    {
+      "module_name": "webserver",
+      "abs_filepath": "/workspace/testdata/webserver/shared/includes.go",
+      "rel_filepath": "webserver/shared/includes.go",
+      "imports": [{ "name": "fmt", "alias": "" }],
+      "libraries": [{ "name": "fmt", "alias": "" }],
+      "functions": [
+        {
+          "name": "Error",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 60,
+            "line_end": 62
+          },
+          "imports": [{ "name": "fmt", "alias": "" }],
+          "libraries": [{ "name": "fmt", "alias": "" }],
+          "code": "func (r *CustomError) Error() string {\n\treturn fmt.Sprintf(\"status %d: err %v\", r.StatusCode, r.Err)\n}",
+          "is_exported": true,
+          "num_of_parameters": 0,
+          "parameter_list": null,
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "string", "is_variadic": false }
+          ],
+          "is_interface": true,
+          "interface_parameter_list": [
+            { "name": "r", "type": "*CustomError", "is_variadic": false }
+          ]
+        }
+      ],
+      "global_variables": [
+        {
+          "token": "var",
+          "name": "NumberFive5",
+          "type": "int",
+          "is_exported": true,
+          "libraries": null,
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 6,
+            "line_end": 6
+          },
+          "code": "var NumberFive5 int = 5",
+          "value": "5"
+        },
+        {
+          "token": "var",
+          "name": "NumberSix",
+          "type": "",
+          "is_exported": true,
+          "libraries": null,
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 9,
+            "line_end": 9
+          },
+          "code": "var NumberSix = 6",
+          "value": "6"
+        },
+        {
+          "token": "const",
+          "name": "NumberSeven",
+          "type": "int",
+          "is_exported": true,
+          "libraries": null,
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 12,
+            "line_end": 12
+          },
+          "code": "const NumberSeven int = 7",
+          "value": "7"
+        },
+        {
+          "token": "var",
+          "name": "NumberEight",
+          "type": "",
+          "is_exported": true,
+          "libraries": null,
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 16,
+            "line_end": 16
+          },
+          "code": "var NumberEight = 8",
+          "value": "8"
+        },
+        {
+          "token": "var",
+          "name": "NumberNine",
+          "type": "int",
+          "is_exported": true,
+          "libraries": null,
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 17,
+            "line_end": 17
+          },
+          "code": "var NumberNine int = 9",
+          "value": "9"
+        },
+        {
+          "token": "var",
+          "name": "NumberTen",
+          "type": "int",
+          "is_exported": true,
+          "libraries": null,
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 18,
+            "line_end": 18
+          },
+          "code": "var NumberTen int",
+          "value": null
+        },
+        {
+          "token": "var",
+          "name": "MyObj",
+          "type": "*Mentor",
+          "is_exported": true,
+          "libraries": null,
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 28,
+            "line_end": 31
+          },
+          "code": "var MyObj *Mentor = \u0026Mentor{\n\tName: \"Eugen\",\n\tAge:  2,\n}",
+          "value": "\u0026Mentor{\n\tName: \"Eugen\",\n\tAge:  2,\n}"
+        }
+      ],
+      "type_definitions": [
+        {
+          "name": "Mentor",
+          "type": "struct{Name string; Age int}",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 22,
+            "line_end": 25
+          },
+          "is_exported": true,
+          "code": "Mentor struct {\n\tName string\n\tAge  int\n}"
+        },
+        {
+          "name": "Colleague",
+          "type": "struct{Name string; Skills []string}",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 34,
+            "line_end": 37
+          },
+          "is_exported": true,
+          "code": "Colleague struct {\n\tName   string\n\tSkills []string\n}"
+        },
+        {
+          "name": "Employee",
+          "type": "struct{Name string; Skills []string}",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 40,
+            "line_end": 43
+          },
+          "is_exported": true,
+          "code": "Employee struct {\n\tName   string\n\tSkills []string\n}"
+        },
+        {
+          "name": "Profile",
+          "type": "struct{Age int; Name string; Salary float64; TechInterest bool}",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 46,
+            "line_end": 51
+          },
+          "is_exported": true,
+          "code": "Profile struct {\n\tAge          int\n\tName         string\n\tSalary       float64\n\tTechInterest bool\n}"
+        },
+        {
+          "name": "CustomError",
+          "type": "struct{StatusCode int; Err error}",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "includes.go",
+            "line_start": 54,
+            "line_end": 57
+          },
+          "is_exported": true,
+          "code": "CustomError struct {\n\tStatusCode int\n\tErr        error\n}"
+        }
+      ]
+    },
+    {
+      "module_name": "webserver",
+      "abs_filepath": "/workspace/testdata/webserver/shared/shared.go",
+      "rel_filepath": "webserver/shared/shared.go",
+      "imports": [
+        { "name": "crypto/sha256", "alias": "" },
+        { "name": "encoding/hex", "alias": "" },
+        { "name": "fmt", "alias": "" },
+        { "name": "math", "alias": "" },
+        { "name": "errors", "alias": "" }
+      ],
+      "libraries": [
+        { "name": "crypto/sha256", "alias": "" },
+        { "name": "encoding/hex", "alias": "" },
+        { "name": "fmt", "alias": "" },
+        { "name": "math", "alias": "" },
+        { "name": "errors", "alias": "" }
+      ],
+      "functions": [
+        {
+          "name": "Add",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 12,
+            "line_end": 23
+          },
+          "imports": [{ "name": "fmt", "alias": "" }],
+          "libraries": [{ "name": "fmt", "alias": "" }],
+          "code": "func Add(a, b int) int {\n\n\tfmt.Printf(`is \"this\" valid?`)\n\n\treturn a + b\n}",
+          "is_exported": true,
+          "num_of_parameters": 2,
+          "parameter_list": [
+            { "name": "a", "type": "int", "is_variadic": false },
+            { "name": "b", "type": "int", "is_variadic": false }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "int", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "Sub",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 26,
+            "line_end": 28
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func Sub(a, b int) int {\n\treturn a - b\n}",
+          "is_exported": true,
+          "num_of_parameters": 2,
+          "parameter_list": [
+            { "name": "a", "type": "int", "is_variadic": false },
+            { "name": "b", "type": "int", "is_variadic": false }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "int", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "Mul",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 31,
+            "line_end": 33
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func Mul(a, b int) int {\n\treturn a * b\n}",
+          "is_exported": true,
+          "num_of_parameters": 2,
+          "parameter_list": [
+            { "name": "a", "type": "int", "is_variadic": false },
+            { "name": "b", "type": "int", "is_variadic": false }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "int", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "Div",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 36,
+            "line_end": 38
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func Div(a, b float64) float64 {\n\treturn a / b\n}",
+          "is_exported": true,
+          "num_of_parameters": 2,
+          "parameter_list": [
+            { "name": "a", "type": "float64", "is_variadic": false },
+            { "name": "b", "type": "float64", "is_variadic": false }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "float64", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "MultiplyByTwo",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 41,
+            "line_end": 43
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func MultiplyByTwo(a int) int {\n\treturn a * getNumberTwo()\n}",
+          "is_exported": true,
+          "num_of_parameters": 1,
+          "parameter_list": [
+            { "name": "a", "type": "int", "is_variadic": false }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "int", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "getNumberTwo",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 46,
+            "line_end": 48
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func getNumberTwo() int {\n\treturn 2\n}",
+          "is_exported": false,
+          "num_of_parameters": 0,
+          "parameter_list": null,
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "int", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "GetHash",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 51,
+            "line_end": 56
+          },
+          "imports": [
+            { "name": "crypto/sha256", "alias": "" },
+            { "name": "encoding/hex", "alias": "" }
+          ],
+          "libraries": [
+            { "name": "crypto/sha256", "alias": "" },
+            { "name": "encoding/hex", "alias": "" }
+          ],
+          "code": "func GetHash(str string) string {\n\thasher := sha256.New()\n\thasher.Write([]byte(str))\n\tsha := hasher.Sum(nil)\n\treturn hex.EncodeToString(sha)\n}",
+          "is_exported": true,
+          "num_of_parameters": 1,
+          "parameter_list": [
+            { "name": "str", "type": "string", "is_variadic": false }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "string", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "FuncFunction",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 59,
+            "line_end": 65
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func FuncFunction(number int) func() int {\n\ta := number\n\n\treturn func() int {\n\t\treturn a + 1\n\t}\n}",
+          "is_exported": true,
+          "num_of_parameters": 1,
+          "parameter_list": [
+            { "name": "number", "type": "int", "is_variadic": false }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "func() int", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "BoolFunction",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 68,
+            "line_end": 70
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func BoolFunction(a bool) bool {\n\treturn a\n}",
+          "is_exported": true,
+          "num_of_parameters": 1,
+          "parameter_list": [
+            { "name": "a", "type": "bool", "is_variadic": false }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "bool", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "Pythagoras",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 73,
+            "line_end": 75
+          },
+          "imports": [{ "name": "math", "alias": "" }],
+          "libraries": [{ "name": "math", "alias": "" }],
+          "code": "func Pythagoras(a, b float64) float64 {\n\treturn math.Sqrt(a*a + b*b)\n}",
+          "is_exported": true,
+          "num_of_parameters": 2,
+          "parameter_list": [
+            { "name": "a", "type": "float64", "is_variadic": false },
+            { "name": "b", "type": "float64", "is_variadic": false }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "float64", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "SumArray",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 78,
+            "line_end": 90
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func SumArray(arr []int, arr2 []int, number int) int {\n\tresult := 0\n\tresult2 := 0\n\n\tfor i := 0; i \u003c len(arr); i++ {\n\t\tresult += arr[i]\n\t}\n\tfor i := 0; i \u003c len(arr2); i++ {\n\t\tresult += arr2[i]\n\t}\n\n\treturn result + result2 + number\n}",
+          "is_exported": true,
+          "num_of_parameters": 3,
+          "parameter_list": [
+            { "name": "arr", "type": "[]int", "is_variadic": false },
+            { "name": "arr2", "type": "[]int", "is_variadic": false },
+            { "name": "number", "type": "int", "is_variadic": false }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "int", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "VariadicFunction",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 93,
+            "line_end": 99
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func VariadicFunction(number int, args ...int) int {\n\tresult := 0\n\tfor i := 0; i \u003c len(args); i++ {\n\t\tresult += args[i]\n\t}\n\treturn number + result\n}",
+          "is_exported": true,
+          "num_of_parameters": 2,
+          "parameter_list": [
+            { "name": "number", "type": "int", "is_variadic": false },
+            { "name": "args", "type": "...int", "is_variadic": true }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "int", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "ExternalVariable",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 102,
+            "line_end": 105
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func ExternalVariable() int {\n\tNumberTen = 10\n\treturn NumberFive5 + NumberSix + NumberSeven + NumberEight + NumberNine + NumberTen + MyObj.Age\n}",
+          "is_exported": true,
+          "num_of_parameters": 0,
+          "parameter_list": null,
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "int", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "CreatingEmployee",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 108,
+            "line_end": 115
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func CreatingEmployee(col Colleague, col2 Colleague) *Employee {\n\temp := \u0026Employee{\n\t\tName:   col.Name,\n\t\tSkills: col2.Skills,\n\t}\n\n\treturn emp\n}",
+          "is_exported": true,
+          "num_of_parameters": 2,
+          "parameter_list": [
+            { "name": "col", "type": "Colleague", "is_variadic": false },
+            { "name": "col2", "type": "Colleague", "is_variadic": false }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "*Employee", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "MultiReturn",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 118,
+            "line_end": 126
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func MultiReturn(col Colleague, skills []string) (*Employee, []int, error) {\n\temp := \u0026Employee{\n\t\tName:   col.Name,\n\t\tSkills: skills,\n\t}\n\tarr := []int{1, 2, 3}\n\n\treturn emp, arr, nil\n}",
+          "is_exported": true,
+          "num_of_parameters": 2,
+          "parameter_list": [
+            { "name": "col", "type": "Colleague", "is_variadic": false },
+            { "name": "skills", "type": "[]string", "is_variadic": false }
+          ],
+          "num_of_return_values": 3,
+          "return_values_list": [
+            { "name": "", "type": "*Employee", "is_variadic": false },
+            { "name": "", "type": "[]int", "is_variadic": false },
+            { "name": "", "type": "error", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "ObjectInArray",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 130,
+            "line_end": 143
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func ObjectInArray(ments []Mentor, number int) int {\n\tm := \u0026Mentor{}\n\tfor i, ment := range ments {\n\t\tif i == 0 {\n\t\t\tm.Name = ment.Name\n\t\t} else if i == 1 {\n\t\t\tm.Age = ment.Age\n\t\t}\n\t}\n\n\tm.Age = m.Age + number\n\n\treturn m.Age\n}",
+          "is_exported": true,
+          "num_of_parameters": 2,
+          "parameter_list": [
+            { "name": "ments", "type": "[]Mentor", "is_variadic": false },
+            { "name": "number", "type": "int", "is_variadic": false }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "int", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "ModifyMap",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 146,
+            "line_end": 149
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func ModifyMap(expenses map[string]int) map[string]int {\n\texpenses[\"food\"] = 4500\n\treturn expenses\n}",
+          "is_exported": true,
+          "num_of_parameters": 1,
+          "parameter_list": [
+            {
+              "name": "expenses",
+              "type": "map[string]int",
+              "is_variadic": false
+            }
+          ],
+          "num_of_return_values": 1,
+          "return_values_list": [
+            { "name": "", "type": "map[string]int", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "ReturnError",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 152,
+            "line_end": 157
+          },
+          "imports": [{ "name": "errors", "alias": "" }],
+          "libraries": [{ "name": "errors", "alias": "" }],
+          "code": "func ReturnError() (string, error) {\n\treturn \"Attention\", \u0026CustomError{\n\t\tStatusCode: 503,\n\t\tErr:        errors.New(\"unavailable\"),\n\t}\n}",
+          "is_exported": true,
+          "num_of_parameters": 0,
+          "parameter_list": null,
+          "num_of_return_values": 2,
+          "return_values_list": [
+            { "name": "", "type": "string", "is_variadic": false },
+            { "name": "", "type": "error", "is_variadic": false }
+          ],
+          "is_interface": false,
+          "interface_parameter_list": null
+        },
+        {
+          "name": "ModifyBasicTypes",
+          "location": {
+            "package_name": "shared",
+            "abs_dirpath": "/workspace/testdata/webserver/shared",
+            "rel_dirpath": "webserver/shared",
+            "filename": "shared.go",
+            "line_start": 160,
+            "line_end": 172
+          },
+          "imports": null,
+          "libraries": null,
+          "code": "func ModifyBasicTypes(name *string, age *int, cash *float64, techInterest *bool, countries *[3]string, myProfile *Profile) {\n\t*name = \"Golang\"\n\t*age = 90\n\t*cash = 50.45\n\t*techInterest = !(*techInterest)\n\t*countries = [3]string{\"sudanese\", \"belgium\", \"zambia\"}\n\t*myProfile = Profile{\n\t\tAge:          100,\n\t\tName:         \"GOOGLE\",\n\t\tSalary:       40.54,\n\t\tTechInterest: true,\n\t}\n}",
+          "is_exported": true,
+          "num_of_parameters": 6,
+          "parameter_list": [
+            { "name": "name", "type": "*string", "is_variadic": false },
+            { "name": "age", "type": "*int", "is_variadic": false },
+            { "name": "cash", "type": "*float64", "is_variadic": false },
+            { "name": "techInterest", "type": "*bool", "is_variadic": false },
+            { "name": "countries", "type": "*[3]string", "is_variadic": false },
+            { "name": "myProfile", "type": "*Profile", "is_variadic": false }
+          ],
+          "num_of_return_values": 0,
+          "return_values_list": null,
+          "is_interface": false,
+          "interface_parameter_list": null
+        }
+      ],
+      "global_variables": null,
+      "type_definitions": null
+    }
+  ]
+}

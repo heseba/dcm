@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# optional parameter for Makefile, default is "all"
+command="${1:-all}"
+
+# regardless of capitalisation, includes numbers 1-9, $ limits to the exact characters, not more
+function isTrue() {
+  if [[ "${@^^}" =~ ^(TRUE$|Y$|O$|ON$|[1-9]) ]]; then
+    return 0;
+  fi
+  return 1
+}
+
+# regex matching for all clean and the glue target
+if [[ "$command" =~ ^clean|^glue$ ]]; then
+  # if not empty and DEBUG=true is set
+  if [[ ! -z "$DEBUG" ]] && isTrue "$DEBUG"; then
+    DEBUG=true make -f "$APP_DIR"/Makefile "$command"
+  else
+    make -f "$APP_DIR"/Makefile "$command"
+  fi
+  exit 0
+fi
+
+# if not empty and DEBUG=true is set
+if [[ ! -z "$DEBUG" ]] && isTrue "$DEBUG"; then
+  goparser -p /usr/app -o "$GOPARSEREXPORT" -m && node "$APP_DIR"/index.js && DEBUG=true make -f "$APP_DIR"/Makefile "$command"
+else
+  goparser -p /usr/app -o "$GOPARSEREXPORT" -m && node "$APP_DIR"/index.js && make -f "$APP_DIR"/Makefile "$command"
+fi

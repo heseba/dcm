@@ -1,0 +1,32 @@
+fragments:
+  - id: 0
+    name: ModulePath
+    runOn: client
+    libs: [fmt, os]
+    location: { filepath: internal/command/command.go }
+  - id: 1
+    name: Status
+    typeDef: true
+    location: { filepath: internal/checks/status.go }
+  - id: 2
+    name: _Status_name_0
+    globalVar: true
+    location: { filepath: internal/checks/status_string.go }
+  - id: 3
+    name: _Status_name_1
+    globalVar: true
+    location: { filepath: internal/checks/status_string.go }
+  - id: 4
+    name: _Status_name_2
+    globalVar: true
+    location: { filepath: internal/checks/status_string.go }
+  - id: 5
+    name: _Status_index_1
+    globalVar: true
+    location: { filepath: internal/checks/status_string.go }
+  - id: 6
+    name: String
+    runOn: client
+    libs: [strconv]
+    dependsOn: [1, 2, 3, 4, 5]
+    location: { filepath: internal/checks/status_string.go }

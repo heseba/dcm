@@ -1,0 +1,8 @@
+!.gitignore
+
+testdata/wire
+testdata/terraform
+testdata/tmp
+testdata/timings
+
+!testdata/webserver/public/**

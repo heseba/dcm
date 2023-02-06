@@ -1,0 +1,52 @@
+version: '3'
+# Docker-Compose 3.4 Extension Fields for reuseable parts (starts with "x-")
+x-base-image:
+  &default-base-image # name for reference
+  build:
+    context: .
+    # passing to Dockerfile
+    args:
+      - GO_VER=${GO_VER:-1.19.0-bullseye}
+      - NODE_VER=${NODE_VER:-16.17.0}
+      - APP_DIR=$APP_DIR
+      - GOPARSEREXPORT=$GOPARSEREXPORT
+      - GOTEMP=$GOTEMP
+      - PLUGINTEMP=$PLUGINTEMP
+  image: $IMAGE_NAME:latest
+services:
+  build_latest:
+    *default-base-image
+  build_current:
+    # Override the image tag
+    << : *default-base-image
+    image: $IMAGE_NAME:$IMAGE_VER
+  dev:
+    << : *default-base-image
+    # adjust to previous working version
+    image: $IMAGE_NAME:0.0.15
+    # user: root
+    env_file: project.env
+    container_name: wasm-builder
+    working_dir: /usr/app
+    environment:
+      - HOST=$HOST
+      - SERVERPORT=$SERVERPORT
+    ports:
+      - $SERVERPORT:$SERVERPORT
+    # sync with local files
+    volumes:
+      - ./docker/scripts:/usr/local/bin
+      - ./docker/wasmbuilder:$APP_DIR
+      - ./docker/goparser:/go/src/goparser
+      - ./testdata:/usr/app
+    stdin_open: true
+    tty: true
+    command: docker-entrypoint dev
+  test-image:
+    env_file: project.env
+    image: $IMAGE_NAME:$IMAGE_VER
+    working_dir: /usr/app
+    volumes:
+      - ./testdata:/usr/app
+    entrypoint: wasmbuilder
+    command: all

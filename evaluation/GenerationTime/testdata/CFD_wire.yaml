@@ -1,0 +1,31 @@
+fragments:
+  - id: 0
+    name: wireErr
+    typeDef: true
+    libs: [go/token]
+    location: { filepath: internal/wire/errors.go }
+  - id: 1
+    name: Error
+    runOn: client
+    dependsOn: [0]
+    location: { filepath: internal/wire/errors.go }
+  - id: 2
+    name: ProviderSetID
+    typeDef: true
+    location: { filepath: internal/wire/parse.go }
+  - id: 3
+    name: String
+    runOn: client
+    dependsOn: [2]
+    libs: [strconv]
+    location: { filepath: internal/wire/parse.go}
+  - id: 4
+    name: Injector
+    typeDef: true
+    location: { filepath: internal/wire/parse.go }
+  - id: 5
+    name: String
+    runOn: client
+    dependsOn: [4]
+    libs: [strconv]
+    location: { filepath: internal/wire/parse.go}

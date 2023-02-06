@@ -1,0 +1,66 @@
+{
+  "name": "Go Devcontainer",
+
+  // Update the 'dockerComposeFile' list if you have more compose files or use different names.
+  // The .devcontainer/docker-compose.yml file contains any overrides you need/want to make.
+  "dockerComposeFile": ["../docker-compose.yaml", "docker-compose.yml"],
+
+  // The 'service' property is the name of the service for the container that VS Code should
+  // use. Update this value and .devcontainer/docker-compose.yml to the real service name.
+  "service": "dev",
+  "runServices": ["dev"],
+
+  // The optional 'workspaceFolder' property is the path VS Code should open by default when connected. This is typically a file mount in .devcontainer/docker-compose.yml
+  "workspaceFolder": "/workspace",
+
+  "settings": {
+    "terminal.integrated.profiles.linux": {
+      "bash": {
+        "path": "bash"
+      }
+    },
+    // config for vscode go extension (where to install go tools)
+    "go.gopath": "/go",
+    "go.goroot": "/usr/local/go",
+    "go.toolsManagement.checkForUpdates": "local",
+    "go.useLanguageServer": true,
+    "go.languageServerFlags": [
+      "-rpc.trace", // for more detailed debug logging
+      "-logfile",
+      "/tmp/gopls.log",
+      "serve",
+      "--debug",
+      "localhost:4001" // to investigate memory usage, see profiles
+    ],
+    "go.delveConfig": {
+      "debugAdapter": "dlv-dap"
+    }
+  },
+
+  // Add the IDs of extensions you want installed when the container is created.
+  "extensions": [
+    "golang.go",
+    "esbenp.prettier-vscode",
+    "ms-azuretools.vscode-docker",
+    "ms-vscode-remote.remote-containers",
+    "EditorConfig.EditorConfig"
+  ],
+
+  // to be able to use "go install" and execute the application in tinygo
+  "remoteEnv": {
+    "PATH": "/root/go/bin:${containerEnv:PATH}",
+    "WORKSPACE": "/workspace"
+  },
+
+  // stop container after VS Code shuts down.
+  "shutdownAction": "stopCompose",
+
+  // this is done via docker-entrypoint script
+  // "postCreateCommand": "cd ${WORKSPACE}/docker/goparser && go mod download && go install && cd ${WORKSPACE}/testdata/webserver && go mod download && go install"
+  "postCreateCommand": "docker-entrypoint dev"
+
+  // Use 'forwardPorts' to make a list of ports inside the container available locally.
+  // "forwardPorts": [8000]
+
+  // "remoteUser": "vscode"
+}

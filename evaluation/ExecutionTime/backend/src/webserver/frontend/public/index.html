@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preload"
+      href="/static/fonts/lato.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/lato-latin-ext.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" type="text/css" href="static/css/global.min.css" />
+    <script type="module" src="static/js/index.js"></script>
+    <title>Evaluation</title>
+  </head>
+  <body class="preload">
+    <a href="#main-content" id="skip-navigation">Navigation überspringen</a>
+    <main id="main-content">
+      <h1>Evaluation</h1>
+      <p>Results will be printed in the browser console.</p>
+      <p>
+        Measurements were made with the JavaScript
+        <a
+          href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now"
+          target="_blank"
+          >performance API</a
+        >.
+      </p>
+      <p>The execution speed of an algorithm depends on:</p>
+      <ul>
+        <li>the implementation</li>
+        <li>
+          the option "disable cache" in the network tab of the browser devtools
+        </li>
+        <li>client and host hardware</li>
+      </ul>
+      <div id="part-fibo">
+        <h2>Fibonacci sequence</h2>
+        <p>
+          Measures the time to calculate the fibonacci sequence up to the
+          maximum int64 range 9.223.372.036.854.775.807 (2<sup>63</sup> - 1).
+        </p>
+        <p>
+          Due to Go <code>.Int()</code> conversion from the
+          <a href="https://pkg.go.dev/syscall/js#Value.Int" target="_blank"
+            >syscall/js</a
+          >
+          library, numbers of the int64 and uint64 space are not fully supported
+          when returning from WASM.<br />
+          After the JavaScript maximum safe integer
+          <code>Number.MAX_SAFE_INTEGER</code> (2<sup>53</sup> - 1), the results
+          from WASM are incorrect. (79th array position and above)
+        </p>
+        <p>
+          JavaScript can use the
+          <a
+            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt"
+            target="_blank"
+            >BigInt</a
+          >
+          datatype to support an arbitrary amount of integers, denoted with an
+          'n' at the end of the number.
+        </p>
+        <p>
+          There was a proposal for
+          <a
+            href="https://github.com/WebAssembly/JS-BigInt-integration"
+            target="_blank"
+            >WASM BitInt</a
+          >
+          which is now part of the
+          <a
+            href="https://webassembly.github.io/spec/js-api/#webassembly-namespace"
+            target="_blank"
+            >main spec</a
+          >. The exchange of the numbers is happening trough the WebAssembly
+          memory. This is currently not part of the architecture.
+        </p>
+        <br />
+        <p>
+          By pressing the button a fibonacci calculation will be triggered for a
+          JavaScript implementation and for a Go in WASM implementation.
+        </p>
+        <p>
+          The execution is fast in both implementations. The calculations are
+          predictable because there aren't alot of variations. Most of it can be
+          cached.
+        </p>
+      </div>
+      <hr />
+      <div id="part-fiboPromise">
+        <h2>Multiple Fibonacci sequence iterations</h2>
+        <p>
+          By pressing the button a fibonacci calculation will be triggered
+          <b>1.000 times</b> for a JavaScript implementation and for a Go in
+          WASM implementation.<br />The executions happen independently. First
+          JavaScript 1000x, then WASM 1000x.<br />Due to Go's limited int64
+          implementation the number of elements shouldn't go above the int64
+          range.
+        </p>
+        <details>
+          <summary>Video about why Promise.all is slower.</summary>
+          <p>
+            The video shows that <code>Promise.all</code> is slower because it
+            queues the tasks in chunks. This is due to the implementation of the
+            WebWorker pool since only a maximum amount of WebWorkers are allowed
+            to run in parallel. Since the are queued at the same time, all other
+            available tasks have to wait.
+          </p>
+          <p>
+            The for loop on the other hand is faster because if the first
+            WebWorker finishes quick enough, it can handle the next task right
+            after its execution.
+          </p>
+          <video controls width="800">
+            <source src="/static/videos/web_worker_pool.mp4" type="video/mp4" />
+
+            Sorry, your browser doesn't support embedded videos.
+          </video>
+        </details>
+        The results show that JavaScript has the native language advantage in
+        terms of execution speed. It takes quite some time to call and execute a
+        WASM file.<br />
+      </div>
+      <hr />
+      <div id="part-nthPrime">
+        <h2>Multiple iterations of find nth prime number</h2>
+        <p>
+          By pressing the button a calculation of prime numbers will be
+          triggered
+          <b>50 times</b> until the 500.000th prime number each iteration was
+          found. <br />The executions happen simultaneously. Each iteration both
+          functions are running until both finished. Then they go into the next
+          iteration.<br />
+          Calling WASM files in a loop can be a downside. When moving the
+          iteration inside the WASM container, it improves the execution speed.
+          Takes ~5min
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,32 @@
+fragments:
+  - id: 0
+    name: fibonacciSequence
+    location: { filepath: shared/evaluation.go }
+  - id: 1
+    name: Fibonacci
+    runOn: client
+    dependsOn: [0]
+    location: { filepath: shared/evaluation.go }
+  - id: 2
+    name: NthPrimeSlow
+    runOn: client
+    location: { filepath: shared/evaluation.go }
+  - id: 3
+    name: isDivisible
+    location: { filepath: shared/evaluation.go }
+  - id: 4
+    name: NthPrime
+    runOn: client
+    dependsOn: [3]
+    libs: [math]
+    location: { filepath: shared/evaluation.go }
+  - id: 5
+    name: NthPrimeIterations
+    runOn: client
+    dependsOn: [4]
+    location: { filepath: shared/evaluation.go }
+  - id: 6
+    name: WasmStartupTime
+    runOn: client
+    libs: [time]
+    location: { filepath: shared/evaluation.go }

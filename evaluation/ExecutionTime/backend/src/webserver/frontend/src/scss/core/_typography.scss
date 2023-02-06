@@ -1,0 +1,27 @@
+@use "../utils/colors" as color;
+
+/*
+# =================================================================
+# TYPOGRAPHY
+# =================================================================
+*/
+
+main {
+  h1 {
+    color: color.$brown;
+    margin: 1.5rem 0 0.75rem;
+  }
+  h2 {
+    color: color.$primary;
+    margin: 1.2rem 0 0.75rem;
+  }
+
+  code {
+    font-size: 0.98rem;
+    background: rgb(76 76 76 / 10%);
+    padding: 0.05rem 0.2rem;
+    border-radius: 0.2rem;
+    margin: 0 0.2rem;
+    border: 1px solid rgb(76 76 76 / 20%);
+  }
+}

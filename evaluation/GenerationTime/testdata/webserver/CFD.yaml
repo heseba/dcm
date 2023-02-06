@@ -1,0 +1,187 @@
+fragments:
+  - id: 0
+    name: Add
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: 1
+    name: Sub
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: 2
+    name: Mul
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: 3
+    name: Div
+    runOn: client
+    libs: [fmt]
+    location: { filepath: shared/shared.go }
+  - id: 4
+    name: MultiplyByTwo
+    runOn: client
+    location: { filepath: shared/shared.go }
+    dependsOn: [5]
+  - id: 5
+    name: getNumberTwo
+    location: { filepath: shared/shared.go }
+  - id: 6
+    name: GetHash
+    runOn: client
+    location: { filepath: shared/shared.go }
+    libs: [crypto/sha256, encoding/hex]
+  - id: 7
+    name: FuncFunction
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: 8
+    name: BoolFunction
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: 9
+    name: Pythagoras
+    runOn: client
+    location: { filepath: shared/shared.go }
+    libs: [math]
+  - id: 10
+    name: SumArray
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: 11
+    name: VariadicFunction
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: 12
+    name: ExternalVariable
+    runOn: client
+    location: { filepath: shared/shared.go }
+    dependsOn: [13, 14, 15, 16, 17, 18, 19]
+  - id: 13
+    name: NumberFive5
+    runOn: client
+    location: { filepath: shared/includes.go }
+    globalVar: true
+  - id: 14
+    name: NumberSix
+    runOn: client
+    location: { filepath: shared/includes.go }
+    globalVar: true
+  - id: 15
+    name: NumberSeven
+    runOn: client
+    location: { filepath: shared/includes.go }
+    globalVar: true
+  - id: 16
+    name: NumberEight
+    runOn: client
+    location: { filepath: shared/includes.go }
+    globalVar: true
+  - id: 17
+    name: NumberNine
+    runOn: client
+    location: { filepath: shared/includes.go }
+    globalVar: true
+  - id: 18
+    name: NumberTen
+    runOn: client
+    location: { filepath: shared/includes.go }
+    globalVar: true
+  - id: 19
+    name: MyObj
+    runOn: client
+    location: { filepath: shared/includes.go }
+    dependsOn: [20]
+    globalVar: true
+  - id: 20
+    name: Mentor
+    runOn: client
+    location: { filepath: shared/includes.go }
+    typeDef: true
+  - id: 21
+    name: CreatingEmployee
+    runOn: client
+    dependsOn: [22, 23]
+    location: { filepath: shared/shared.go }
+  - id: 22
+    name: Employee
+    runOn: client
+    location: { filepath: shared/includes.go }
+    typeDef: true
+  - id: 23
+    name: Colleague
+    runOn: client
+    location: { filepath: shared/includes.go }
+    typeDef: true
+  - id: 24
+    name: MultiReturn
+    runOn: client
+    dependsOn: [22, 23]
+    location: { filepath: shared/shared.go }
+  - id: 25
+    name: ObjectInArray
+    runOn: client
+    dependsOn: [20]
+    location: { filepath: shared/shared.go }
+  - id: 26
+    name: ModifyMap
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: 27
+    name: ReturnError
+    runOn: client
+    libs: [errors]
+    dependsOn: [28, 29]
+    location: { filepath: shared/shared.go }
+  - id: 28
+    name: CustomError
+    runOn: client
+    location: { filepath: shared/includes.go }
+    typeDef: true
+  - id: 29
+    name: Error
+    runOn: client
+    libs: [fmt]
+    dependsOn: [28]
+    location: { filepath: shared/includes.go }
+  - id: 30
+    name: Check
+    runOn: client
+    libs: [fmt]
+    location: { filepath: shared/shared.go }
+  - id: 31
+    name: IShape
+    runOn: client
+    typeDef: true
+    location: { filepath: shared/includes.go }
+  - id: 32
+    name: Rectangle
+    dependsOn: [35]
+    typeDef: true
+    runOn: client
+    location: { filepath: shared/includes.go }
+  - id: 33
+    name: Circle
+    dependsOn: [34]
+    typeDef: true
+    runOn: client
+    location: { filepath: shared/includes.go }
+  - id: 34
+    name: Area
+    dependsOn: [33]
+    runOn: client
+    location: { filepath: shared/includes.go }
+    libs: [mathematics math]
+  - id: 35
+    name: Area
+    dependsOn: [32]
+    runOn: client
+    location: { filepath: shared/includes.go }
+  - id: 36
+    name: getArea
+    dependsOn: [31, 32, 33]
+    runOn: client
+    location: { filepath: shared/includes.go }
+  - id: 37
+    name: CalcArea
+    dependsOn: [31, 32, 33, 36]
+    runOn: client
+    location: { filepath: shared/shared.go }
