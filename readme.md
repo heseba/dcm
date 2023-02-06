@@ -9,13 +9,13 @@ The repository contains the DCM infrastructure implemented in Go, the evaluation
 
 - `wasm-builder` the DCM infrastructure for compiling code fragments
 - `project` a sample project that can be used with the DCM infrastructure, containing
- - `project/backend/src/codedistribution` the DCM runtime infrastructure
- - `project/backend/src/codedistribution` a sample web shop application showcasing the integration of DCM into web applications
+  - `project/backend/src/codedistribution` the DCM runtime infrastructure
+  - `project/backend/src/codedistribution` a sample web shop application showcasing the integration of DCM into web applications
 - `evaluation` the evaluation and data containing
- - `evaluation/GenerationTime` samples and scripts used for scenario I
- - `evaluation/NetworkTime` samples and scripts used for scenario II
- - `evaluation/ExecutionTime` samples and scripts used for scenario III
- - `evaluation/measurements` the raw evaluation data
+  - `evaluation/GenerationTime` samples and scripts used for scenario I
+  - `evaluation/NetworkTime` samples and scripts used for scenario II
+  - `evaluation/ExecutionTime` samples and scripts used for scenario III
+  - `evaluation/measurements` the raw evaluation data
 
 To enable easy replication, we are using Docker. Follow the instructions below and in the readme files in the subdirectories to try it out yourself.
 
