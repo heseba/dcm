@@ -73,4 +73,4 @@ build-wasm:
 Navigate to the URL as prompted in the console.
 
 # Acknowledgement
-We would like to thank Alexander Senger as main contributor to the proof-of-concept implementation of the DCM architecture and the evaluation expriments.
+We would like to thank Alexander Senger as main contributor to the proof-of-concept implementation of the DCM architecture and the evaluation experiments.
