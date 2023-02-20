@@ -46,7 +46,7 @@ The environment variable paths are relative to the path which you mount into the
 
 ```yml
 build-wasm:
-  image: asenger/wasm-builder:<version>
+  image: sebastianheil/wasm-builder:<version>
   environment:
     - CFD=<path/to/cdf/file>
     - WWW=<path/to/public/folder>
