@@ -91,7 +91,7 @@ Make sure that your mounted directory has read, write and execute permissions fo
 ```yaml
 build-wasm:
   env_file: project.env
-  image: asenger/wasm-builder:<version>
+  image: sebastianheil/wasm-builder:<version>
   working_dir: /usr/app
   volumes:
     - <hostPath>:/usr/app

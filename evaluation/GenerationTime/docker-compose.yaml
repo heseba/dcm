@@ -22,7 +22,7 @@ services:
       - CFD=./terraform/CFD.yaml
       - WWW=./terraform/www
       - PLUGINS=./terraform/plugins
-    image: asenger/wasm-builder:0.0.15
+    image: sebastianheil/wasm-builder:0.0.15
     working_dir: /usr/app
     volumes:
       - ./testdata:/usr/app
