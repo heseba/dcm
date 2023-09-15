@@ -1,8 +1,9 @@
 # DCM: Dynamic Client-Server Code Migration
 
-This is the online appendix for the following paper:
+This is the online appendix for all publications related to DCM:
 
-Heil, S., Gaedke, M.: DCM: Dynamic Client-Server Code Migration. Proceedings of the 23rd International Conference on Web Engineering, ICWE 2023, pp. 3-18, 2023.
+1. Submitted to Journal of Web Engineering: Heil, S., Schröder, L., Gaedke, M.: Client-Server Code Mobility at Runtime.
+2. Heil, S., Gaedke, M.: DCM: Dynamic Client-Server Code Migration. Proceedings of the 23rd International Conference on Web Engineering, ICWE 2023, pp. 3-18, 2023.
 
 
 The repository contains the DCM infrastructure implemented in Go, the evaluation projects and scripts in the following repository structure:
