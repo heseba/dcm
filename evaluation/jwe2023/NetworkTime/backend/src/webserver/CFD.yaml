@@ -1,0 +1,21 @@
+fragments:
+  - id: fibonacciSequence
+    location: { filepath: shared/evaluation.go }
+  - id: Fibonacci
+    runOn: client
+    dependsOn: [fibonacciSequence]
+    location: { filepath: shared/evaluation.go }
+  - id: NthPrimeSlow
+    runOn: client
+    location: { filepath: shared/evaluation.go }
+  - id: isDivisible
+    location: { filepath: shared/evaluation.go }
+  - id: NthPrime
+    runOn: client
+    dependsOn: [isDivisible]
+    libs: [math]
+    location: { filepath: shared/evaluation.go }
+  - id: NthPrimeIterations
+    runOn: client
+    dependsOn: [NthPrime]
+    location: { filepath: shared/evaluation.go }

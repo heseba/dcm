@@ -1,0 +1,34 @@
+{{ define "page" }}
+<a href="#main-content" id="skip-navigation">Navigation überspringen</a>
+<main id="main-content">
+  <div class="container">
+    <h1>Evaluation</h1>
+    <p>Results will be printed in the browser console.</p>
+    <p>Measurements were made with the JavaScript Date UTC timestamps.</p>
+    <div class="part-pingpong">
+      <h2>WebSocket Ping Pong</h2>
+      <p>
+        Time between "client send an event to the server" and "the response from
+        the server to the client".
+      </p>
+    </div>
+    <div class="part-fragmentlist">
+      <h2>Initial WebSocket connection</h2>
+      <p>
+        Time between the initial WebSocket connection on page load and the first
+        fragment list update.
+      </p>
+      <p>Happens on page load.</p>
+    </div>
+    <h2>Time between API and client</h2>
+    <p>
+      Time between API received a change from the decision system and the change
+      got transfered to the client.
+    </p>
+    <p>
+      Happens when the API receives a fragment change.
+      <em>Decision System Emulator</em> extension is needed.
+    </p>
+  </div>
+</main>
+{{- end }}

@@ -16,7 +16,11 @@ const cliParams = CommandLine.handleCliParameters(process.argv.slice(2));
 let cfdPath = '', // Code-Fragment-Description Path
   pluginTempPath = '', // final plugin Go Code Path
   goTempPath = '', // temporary Go Code Path
-  goParserExportPath = ''; // JSON export path locally
+  goParserExportPath = '', // JSON export path locally
+  functionsPath = '',
+  wsPath = '',
+  apiPath = '',
+  maxReconnectAttempts = 3;
 
 // if env variable cfd is defined then it must be inside docker
 cfdPath = cliParams?.cfd ?? process.env.CFD ?? undefined;
@@ -37,6 +41,11 @@ goTempPath = cliParams?.temp ?? process.env.GOTEMP ?? './tmp/gotemp';
 
 goParserExportPath = cliParams?.export ?? process.env.GOPARSEREXPORT ?? './tmp';
 
+functionsPath = cliParams?.functionspath ?? process.env.FUNCTIONS ?? './tmp';
+wsPath = cliParams?.wspath ?? process.env.WSPATH ?? '/ws';
+apiPath = cliParams?.apipath ?? process.env.APIPATH ?? '/api/v1';
+maxReconnectAttempts = cliParams?.maxreconnects ?? process.env.MAXRECONNECTS ?? 3;
+
 (async () => {
   console.time('WASM-Builder took');
 
@@ -51,7 +60,11 @@ goParserExportPath = cliParams?.export ?? process.env.GOPARSEREXPORT ?? './tmp';
     cfdPath,
     pluginTempPath,
     goTempPath,
-    goParserExportPath
+    goParserExportPath,
+    functionsPath,
+    wsPath,
+    apiPath,
+    maxReconnectAttempts
   ).build();
 
   Debug.printExecutionTime('WASM-Builder took');

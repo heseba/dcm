@@ -1,0 +1,66 @@
+fragments:
+  - id: IsLightRendererSupported
+    runOn: server
+    location: { filepath: src/tui/light_unix.go }
+  - id: HasFullscreenRenderer
+    runOn: server
+    location: { filepath: src/tui/dummy.go }
+  - id: Max
+    runOn: client
+    location: { filepath: src/util/util.go }
+  - id: Max16
+    runOn: client
+    location: { filepath: src/util/util.go }
+  - id: Max32
+    runOn: client
+    location: { filepath: src/util/util.go }
+  - id: Min
+    runOn: client
+    location: { filepath: src/util/util.go }
+  - id: Min32
+    runOn: client
+    location: { filepath: src/util/util.go }
+  - id: Constrain
+    runOn: client
+    location: { filepath: src/util/util.go }
+  - id: Constrain32
+    runOn: client
+    location: { filepath: src/util/util.go }
+  - id: AsUint16
+    runOn: client
+    libs: [math]
+    location: { filepath: src/util/util.go }
+  - id: Once
+    runOn: server
+    location: { filepath: src/util/util.go }
+  - id: Chars
+    typeDef: true
+    location: { filepath: src/util/chars.go }
+  - id: overflow64
+    globalVar: true
+    location: { filepath: src/util/chars.go }
+  - id: overflow32
+    globalVar: true
+    location: { filepath: src/util/chars.go }
+  - id: checkAscii
+    runOn: client
+    libs: [unsafe, unicode/utf8]
+    dependsOn: [overflow64, overflow32]
+    location: { filepath: src/util/chars.go }
+  - id: RunesToChars
+    runOn: client
+    dependsOn: [Chars]
+    libs: [unsafe]
+    location: { filepath: src/util/chars.go }
+  - id: ToChars
+    runOn: client
+    dependsOn: [checkAscii, RunesToChars, Chars]
+    libs: [unicode/utf8]
+    location: { filepath: src/util/chars.go }
+  - id: normalized
+    globalVar: true
+    location: { filepath: src/algo/normalize.go }
+  - id: NormalizeRunes
+    runOn: client
+    dependsOn: [normalized]
+    location: { filepath: src/algo/normalize.go }

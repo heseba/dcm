@@ -1,0 +1,81 @@
+fragments:
+  - id: FileSystem
+    libs: ["net/http"]
+    location: { filepath: assets/assets.go }
+    globalVar: true
+  - id: content
+    libs: ["io/fs"]
+    location: { filepath: assets/assets.go }
+    globalVar: true
+  - id: prefixPath
+    location: { filepath: assets/assets.go }
+    globalVar: true
+  - id: Load
+    runOn: client
+    libs: ["net/http"]
+    dependsOn: [FileSystem, content, prefixPath]
+    location: { filepath: assets/assets.go }
+  - id: newRandomTLSKeyPair
+    libs: [crypto/rand, crypto/rsa, crypto/tls, crypto/x509, encoding/pem, math/big]
+    runOn: server
+    location: { filepath: pkg/transport/tls.go }
+  - id: newCustomTLSKeyPair
+    libs: ["crypto/tls"]
+    runOn: server
+    location: { filepath: pkg/transport/tls.go }
+  - id: newCertPool
+    libs: [crypto/x509, os]
+    runOn: server
+    location: { filepath: pkg/transport/tls.go }
+  - id: NewServerTLSConfig
+    runOn: server
+    libs: ["crypto/tls"]
+    dependsOn: [newRandomTLSKeyPair, newCertPool, newCustomTLSKeyPair]
+    location: { filepath: pkg/transport/tls.go }
+  - id: NewClientTLSConfig
+    libs: ["crypto/tls"]
+    runOn: client
+    dependsOn: [newCertPool, NewServerTLSConfig]
+    location: { filepath: pkg/transport/tls.go }
+  - id: Values
+    typeDef: true
+    location: { filepath: pkg/config/load.go }
+  - id: glbEnvs
+    globalVar: true
+    location: { filepath: pkg/config/load.go }
+  - id: GetValues
+    dependsOn: [Values, glbEnvs]
+    runOn: server
+    location: { filepath: pkg/config/load.go }
+  - id: version
+    globalVar: true
+    location: { filepath: pkg/util/version/version.go }
+  - id: Full
+    dependsOn: [version]
+    runOn: client
+    location: { filepath: pkg/util/version/version.go }
+  - id: getSubVersion
+    libs: [strings, strconv]
+    runOn: client
+    location: { filepath: pkg/util/version/version.go }
+  - id: Proto
+    dependsOn: [getSubVersion]
+    runOn: client
+    location: { filepath: pkg/util/version/version.go }
+  - id: Major
+    dependsOn: [getSubVersion]
+    runOn: client
+    location: { filepath: pkg/util/version/version.go }
+  - id: Minor
+    dependsOn: [getSubVersion]
+    runOn: client
+    location: { filepath: pkg/util/version/version.go }
+  - id: LessThan
+    dependsOn: [Proto, Major, Minor]
+    runOn: client
+    location: { filepath: pkg/util/version/version.go }
+  - id: Compat
+    dependsOn: [LessThan]
+    runOn: client
+    location: { filepath: pkg/util/version/version.go }
+

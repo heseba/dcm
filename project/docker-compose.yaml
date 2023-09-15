@@ -1,7 +1,7 @@
 version: '3'
 x-base-image: &default-base-image # name for reference
   env_file: go.env
-  image: golang:${GO_VARIANT:-1.19.0-bullseye}
+  image: golang:${GO_VARIANT:-1.21.1-bookworm}
   working_dir: $DOCKER_GOSRC/webserver
   environment:
     - HOST=$HOST
@@ -10,6 +10,7 @@ x-base-image: &default-base-image # name for reference
     - $GOSRC:$DOCKER_GOSRC
   ports:
     - ${SERVERPORT:-8000}:${SERVERPORT:-8000}
+    - 40000:40000
 services:
   go-dev:
     << : *default-base-image
@@ -22,6 +23,15 @@ services:
         go install &&
         bash
       "
+  go-debug:
+    <<: *default-base-image
+    container_name: go-debug
+    entrypoint: bash -c
+    command:
+      - |
+          go install .
+          go install github.com/go-delve/delve/cmd/dlv@latest
+          dlv --listen=:40000 --headless=true --api-version=2 --accept-multiclient exec /go/bin/webserver
   go-server:
     << : *default-base-image
     container_name: go-server
@@ -31,11 +41,12 @@ services:
         go install .
         webserver
   build-wasm:
-    image: sebastianheil/wasm-builder:0.0.15
+    image: sebastianheil/wasm-builder:0.0.16
     environment:
       - CFD=backend/src/webserver/CFD.yaml
       - WWW=backend/src/webserver/frontend/public/static/js/CodeDistributor
       - PLUGINS=backend/src/codedistribution/plugins
+      - FUNCTIONS=backend/src/webserver/frontend/public/static/js/CodeDistributor
     working_dir: /usr/app
     volumes:
       - .:/usr/app

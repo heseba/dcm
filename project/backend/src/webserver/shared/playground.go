@@ -34,3 +34,7 @@ func GenObj(name string, age int) *Person {
 		Age:  age,
 	}
 }
+
+func NewSubtract(a, b int) int {
+	return a - b
+}

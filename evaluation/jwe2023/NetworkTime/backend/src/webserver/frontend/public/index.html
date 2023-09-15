@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preload"
+      href="/static/fonts/lato.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/static/fonts/lato-latin-ext.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link rel="stylesheet" type="text/css" href="static/css/global.min.css" />
+    <script type="module" src="static/js/index.js"></script>
+    <title>Evaluation</title>
+  </head>
+  <body class="preload">
+    <a href="#main-content" id="skip-navigation">Navigation überspringen</a>
+    <main id="main-content">
+      <div class="container">
+        <h1>Evaluation</h1>
+        <p>Results will be printed in the browser console.</p>
+        <p>Measurements were made with the JavaScript Date UTC timestamps.</p>
+        <div class="part-pingpong">
+          <h2>WebSocket Ping Pong</h2>
+          <p>
+            Time between client send an event to the server and the response
+            from the server on client side.
+          </p>
+        </div>
+        <div class="part-fragmentlist">
+          <h2>Initial WebSocket connection</h2>
+          <p>
+            Time between the initial WebSocket connection on page load and the
+            first fragment list update.
+          </p>
+          <p>Happens on page load.</p>
+        </div>
+        <h2>Time between API and client</h2>
+        <p>
+          Time between API received a change from the decision system and the
+          change got transfered to the client.
+        </p>
+        <p>
+          Happens when the API receives a fragment change.
+          <em>Decision System Emulator</em> extension is needed.
+        </p>
+      </div>
+    </main>
+  </body>
+</html>

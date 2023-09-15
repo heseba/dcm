@@ -2,7 +2,7 @@ version: '3'
 services:
   go-dev:
     env_file: go.env
-    image: golang:${GO_VARIANT:-1.19.0-bullseye}
+    image: golang:${GO_VARIANT:-1.21.1-bookworm}
     working_dir: $DOCKER_GOSRC/webserver
     environment:
       - HOST=$HOST
@@ -22,7 +22,7 @@ services:
       "
   go-server:
     env_file: go.env
-    image: golang:${GO_VARIANT:-1.19.0-bullseye}
+    image: golang:${GO_VARIANT:-1.21.6-bookworm}
     working_dir: $DOCKER_GOSRC/webserver
     environment:
       - HOST=$HOST
@@ -38,11 +38,12 @@ services:
         go install .
         webserver
   build-wasm:
-    image: sebastianheil/wasm-builder:0.0.15
+    image: sebastianheil/wasm-builder:0.0.16
     environment:
       - CFD=backend/src/webserver/CFD.yaml
       - WWW=backend/src/webserver/frontend/public/js/CodeDistributor
       - PLUGINS=backend/src/codedistribution/plugins
+      - FUNCTIONS=backend/src/webserver/frontend/public/static/js/CodeDistributor
     working_dir: /usr/app
     volumes:
       - .:/usr/app

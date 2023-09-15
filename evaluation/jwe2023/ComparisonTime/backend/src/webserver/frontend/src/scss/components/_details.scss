@@ -1,0 +1,45 @@
+$_borderRadius: 0.2rem;
+$_border: 1px solid rgba(76, 76, 76, 0.2);
+$_bodyPadding: 1rem;
+$_elementMargin: 1rem;
+$_headerPadding: 1rem;
+
+details {
+  margin: (3rem + $_elementMargin) 0 $_elementMargin;
+  border-radius: $_borderRadius;
+  padding: 0 $_bodyPadding;
+
+  summary {
+    margin: (-4rem + $_elementMargin) (-$_bodyPadding) 0;
+    background: rgba(76, 76, 76, 0.1);
+    padding: $_headerPadding;
+    border-radius: $_borderRadius;
+
+    &:hover {
+      cursor: pointer;
+      user-select: none;
+    }
+  }
+}
+
+details[open] {
+  border-left: $_border;
+  border-right: $_border;
+  border-bottom: $_border;
+  padding: $_bodyPadding;
+
+  summary {
+    margin: -4rem (-$_bodyPadding) $_bodyPadding;
+    background: rgba(76, 76, 76, 0.2);
+    border-radius: 0;
+    border-top-left-radius: $_borderRadius;
+    border-top-right-radius: $_borderRadius;
+    outline: $_border;
+  }
+}
+
+details {
+  video {
+    margin-top: 2rem;
+  }
+}

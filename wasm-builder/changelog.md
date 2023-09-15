@@ -16,11 +16,19 @@ Security in case of vulnerabilities.
 
 ## [Unreleased]
 
+## [0.0.16] - 2022-09-15
+
+### Changed
+
+- upgrading to Go v1.21.1
+- changed to string-based IDs, that also provide a default value for the name
+- autogenerate JS functions for calling the fragments
+
 ## [0.0.15] - 2022-08-21
 
 ### Changed
 
-- upgrading to Go v1.19.0
+- upgrading to Go v1.20.6
 
 ## [0.0.14] - 2022-08-03
 

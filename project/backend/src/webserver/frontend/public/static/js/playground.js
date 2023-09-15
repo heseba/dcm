@@ -1,9 +1,9 @@
 'use strict';
 
 import { selectElement, selectElements } from './utils/helpers.js';
-import { codeDistributor } from './initCodeDistributor.js';
+import { Add, GetHash, CalcMwst, GenObj, NewSubtract } from './CodeDistributor/functions.js';
 
-function wasm_add(codeDistributor) {
+function wasm_add() {
   const fields = {
     num1_input: selectElement('#add_numberOne'),
     num2_input: selectElement('#add_numberTwo'),
@@ -26,11 +26,7 @@ function wasm_add(codeDistributor) {
       const num1 = Number(fields.num1_input.value);
       const num2 = Number(fields.num2_input.value);
       try {
-        fields.result_output.innerText = await codeDistributor.call({
-          wasmId: 0,
-          wasmFunc: 'Add',
-          wasmParams: [num1, num2],
-        });
+        fields.result_output.innerText = await Add(num1, num2)
       } catch (error) {
         fields.result_output.innerText = '#error';
         throw error;
@@ -40,7 +36,7 @@ function wasm_add(codeDistributor) {
   );
 }
 
-function wasm_gethash(codeDistributor) {
+function wasm_gethash() {
   const fields = {
     message: selectElement('#gethash_message'),
     result_output: selectElement('#gethash_result'),
@@ -54,11 +50,7 @@ function wasm_gethash(codeDistributor) {
 
       const message = fields.message.value;
       try {
-        fields.result_output.innerText = await codeDistributor.call({
-          wasmId: 1,
-          wasmFunc: 'GetHash',
-          wasmParams: [message],
-        });
+        fields.result_output.innerText = await GetHash(message)
       } catch (error) {
         fields.result_output.innerText = '#error';
         throw error;
@@ -68,7 +60,7 @@ function wasm_gethash(codeDistributor) {
   );
 }
 
-function wasm_calcmwst(codeDistributor) {
+function wasm_calcmwst() {
   const fields = {
     num: selectElement('#calcmwst_num'),
     result_output: selectElement('#calcmwst_result'),
@@ -86,11 +78,7 @@ function wasm_calcmwst(codeDistributor) {
       try {
         fields.result_output.innerText =
           (
-            await codeDistributor.call({
-              wasmId: 2,
-              wasmFunc: 'CalcMwst',
-              wasmParams: [num],
-            })
+            await CalcMwst(num)
           ).toFixed(2) + ' €';
       } catch (error) {
         fields.result_output.innerText = '#error';
@@ -101,7 +89,7 @@ function wasm_calcmwst(codeDistributor) {
   );
 }
 
-function wasm_genobj(codeDistributor) {
+function wasm_genobj() {
   const fields = {
     name: selectElement('#genobj_name'),
     age: selectElement('#genobj_age'),
@@ -124,11 +112,7 @@ function wasm_genobj(codeDistributor) {
       const name = fields.name.value;
       const age = Number(fields.age.value);
       try {
-        const result = await codeDistributor.call({
-          wasmId: 4,
-          wasmFunc: 'GenObj',
-          wasmParams: [name, age],
-        });
+          const result = await GenObj(name, age)
 
         let pre = document.createElement('pre');
         pre.textContent = JSON.stringify(result, null, 2);
@@ -141,11 +125,46 @@ function wasm_genobj(codeDistributor) {
     false
   );
 }
+
+function wasm_subtract() {
+  const fields = {
+    num1_input: selectElement('#sub_numberOne'),
+    num2_input: selectElement('#sub_numberTwo'),
+    result_output: selectElement('#sub_result'),
+    button: selectElement('#sub_calc'),
+  };
+
+  fields.button.addEventListener(
+    'click',
+    async (evt) => {
+      if (
+        !fields.num1_input.value ||
+        !fields.num2_input.value ||
+        !Number.isInteger(Number(fields.num1_input.value)) ||
+        !Number.isInteger(Number(fields.num2_input.value))
+      ) {
+        return;
+      }
+
+      const num1 = Number(fields.num1_input.value);
+      const num2 = Number(fields.num2_input.value);
+      try {
+        fields.result_output.innerText = await NewSubtract(num1, num2)
+      } catch (error) {
+        fields.result_output.innerText = '#error';
+        throw error;
+      }
+    },
+    false
+  );
+}
+
 function main() {
-  wasm_add(codeDistributor);
-  wasm_gethash(codeDistributor);
-  wasm_calcmwst(codeDistributor);
-  wasm_genobj(codeDistributor);
+  wasm_add();
+  wasm_gethash();
+  wasm_calcmwst();
+  wasm_genobj();
+  wasm_subtract();
 
   let forms = selectElements('form');
   [...forms].forEach((form) => {

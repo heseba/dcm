@@ -41,7 +41,7 @@ class CFDValidator {
    * @param {GoFragmentGlobalVariable|GoFragmentTypeDefinition|GoFragmentFunction} frag
    * @returns {boolean} true/false
    */
-  #isPrivateToFile = (frag) => frag.name[0] === frag.name[0].toLowerCase();
+  #isPrivateToFile = (frag) => (!Utils.isUndefined(frag.id) ? frag.id : frag.name)[0] === (!Utils.isUndefined(frag.id) ? frag.id : frag.name)[0].toLowerCase();
 
   #fillInvalidKeys = (obj, arr) => {
     for (var k in obj) {
@@ -68,9 +68,10 @@ class CFDValidator {
    * * Document must have at least one fragment
    * * Every fragment must provide 'runOn' property
    */
-  validate = () => {
+  validate = (initialMaxId, updateMaxId) => {
     /** @type {string[]} */
     const errors = [];
+//    let maxId = initialMaxId;
 
     if (Utils.isUndefined(this.#document)) {
       console.error(`Invalid CFD file structure.\n\t- CFD file is empty.`);
@@ -98,6 +99,21 @@ class CFDValidator {
       const isPrivateToFile = this.#isPrivateToFile(fragment);
       this.#fillInvalidKeys(fragment, collectedInvalidKeys);
 
+      if (Utils.isUndefined(fragment.id) && Utils.isUndefined(fragment.name)) {
+        console.error(
+          "Fragment is missing both ID and name!"
+        );
+        return false;
+      }
+      let fragment_name = !Utils.isUndefined(fragment.id) ? fragment.id : fragment.name
+
+//      // track maximumm id for later automatic assignment of ids
+//      if (typeof fragment.id !== 'undefined' && typeof fragment.id == 'number') {
+//        if (fragment.id > maxId) {
+//          maxId = fragment.id;
+//        }
+//      }
+
       // check possible typos in properties
       for (const prop of collectedInvalidKeys) {
         let testCase = {
@@ -113,25 +129,25 @@ class CFDValidator {
 
         if (testCase.lib && !exactRegex.libs) {
           errors.push(
-            `Fragment #${fragment.id} '${fragment.name}' has probably invalid property: '${prop}'. Did you mean: 'libs'?`
+            `Fragment '${fragment_name}' has probably invalid property: '${prop}'. Did you mean: 'libs'?`
           );
           continue;
         }
         if (testCase.depend && !exactRegex.dependsOn) {
           errors.push(
-            `Fragment #${fragment.id} '${fragment.name}' has probably invalid property: '${prop}'. Did you mean: 'dependsOn'?`
+            `Fragment '${fragment_name}' has probably invalid property: '${prop}'. Did you mean: 'dependsOn'?`
           );
           continue;
         }
         if (!isPrivateToFile && testCase.run && !exactRegex.runOn) {
           errors.push(
-            `Fragment #${fragment.id} '${fragment.name}' has probably invalid property: '${prop}'. Did you mean: 'runOn'?`
+            `Fragment '${fragment_name}' has probably invalid property: '${prop}'. Did you mean: 'runOn'?`
           );
           continue;
         }
 
         errors.push(
-          `Fragment #${fragment.id} '${fragment.name}' has unknown property: '${prop}'.`
+          `Fragment '${fragment_name}' has unknown property: '${prop}'.`
         );
       }
 
@@ -151,9 +167,7 @@ class CFDValidator {
             !this.#validRunOnLocations.includes(fragment.runOn.trim())
           ) {
             errors.push(
-              `Fragment #${fragment.id} '${
-                fragment.name
-              }' doesn't have valid 'runOn' value of: '${
+              `Fragment '${fragment_name}' doesn't have valid 'runOn' value of: '${
                 fragment.runOn
               }'. Options: [${this.#validRunOnLocations.join(', ')}]`
             );
@@ -167,12 +181,14 @@ class CFDValidator {
 
           if (!runOnKey) {
             errors.push(
-              `Fragment #${fragment.id} '${fragment.name}' doesn't have property: 'runOn'.`
+              `Fragment '${fragment.name}' doesn't have property: 'runOn'.`
             );
           }
         }
       }
     }
+
+//    updateMaxId(maxId);
 
     return errors.length === 0
       ? true

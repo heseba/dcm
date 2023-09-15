@@ -21,8 +21,9 @@ class DataFragment {
     this.cfdPath = cfdPath;
 
     // from the YAML file
-    this.id = yamlData.id;
+    this.id = yamlData.id ?? 'auto';
     this.name = yamlData.name;
+    this.fragment_name = yamlData.fragment_name;
     this.runOn = yamlData.runOn;
     this.location = yamlData.location;
     this.libs = yamlData.libs;
@@ -60,8 +61,8 @@ class DataFragment {
     this.fragmentCode = '';
   }
 
-  update = (goParserExportPath) => {
-    new DataFragmentUpdater(this, goParserExportPath).update();
+  update = (goParserExportPath, maxId) => {
+    new DataFragmentUpdater(this, goParserExportPath, maxId).update();
   };
 }
 

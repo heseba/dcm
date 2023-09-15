@@ -1,0 +1,151 @@
+fragments:
+  - id: Add
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: Sub
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: Mul
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: Div
+    runOn: client
+    libs: [fmt]
+    location: { filepath: shared/shared.go }
+  - id: MultiplyByTwo
+    runOn: client
+    location: { filepath: shared/shared.go }
+    dependsOn: [getNumberTwo]
+  - id: getNumberTwo
+    location: { filepath: shared/shared.go }
+  - id: GetHash
+    runOn: client
+    location: { filepath: shared/shared.go }
+    libs: [crypto/sha256, encoding/hex]
+  - id: FuncFunction
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: BoolFunction
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: Pythagoras
+    runOn: client
+    location: { filepath: shared/shared.go }
+    libs: [math]
+  - id: SumArray
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: VariadicFunction
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: ExternalVariable
+    runOn: client
+    location: { filepath: shared/shared.go }
+    dependsOn: [NumberFive5, NumberSix, NumberSeven, NumberEight, NumberNine, NumberTen, MyObj]
+  - id: NumberFive5
+    runOn: client
+    location: { filepath: shared/includes.go }
+    globalVar: true
+  - id: NumberSix
+    runOn: client
+    location: { filepath: shared/includes.go }
+    globalVar: true
+  - id: NumberSeven
+    runOn: client
+    location: { filepath: shared/includes.go }
+    globalVar: true
+  - id: NumberEight
+    runOn: client
+    location: { filepath: shared/includes.go }
+    globalVar: true
+  - id: NumberNine
+    runOn: client
+    location: { filepath: shared/includes.go }
+    globalVar: true
+  - id: NumberTen
+    runOn: client
+    location: { filepath: shared/includes.go }
+    globalVar: true
+  - id: MyObj
+    runOn: client
+    location: { filepath: shared/includes.go }
+    dependsOn: [Mentor]
+    globalVar: true
+  - id: Mentor
+    runOn: client
+    location: { filepath: shared/includes.go }
+    typeDef: true
+  - id: CreatingEmployee
+    runOn: client
+    dependsOn: [Employee, Colleague]
+    location: { filepath: shared/shared.go }
+  - id: Employee
+    runOn: client
+    location: { filepath: shared/includes.go }
+    typeDef: true
+  - id: Colleague
+    runOn: client
+    location: { filepath: shared/includes.go }
+    typeDef: true
+  - id: MultiReturn
+    runOn: client
+    dependsOn: [Employee, Colleague]
+    location: { filepath: shared/shared.go }
+  - id: ObjectInArray
+    runOn: client
+    dependsOn: [Mentor]
+    location: { filepath: shared/shared.go }
+  - id: ModifyMap
+    runOn: client
+    location: { filepath: shared/shared.go }
+  - id: ReturnError
+    runOn: client
+    libs: [errors]
+    dependsOn: [CustomError, Error]
+    location: { filepath: shared/shared.go }
+  - id: CustomError
+    runOn: client
+    location: { filepath: shared/includes.go }
+    typeDef: true
+  - id: Error
+    runOn: client
+    libs: [fmt]
+    dependsOn: [CustomError]
+    location: { filepath: shared/includes.go }
+  - id: Check
+    runOn: client
+    libs: [fmt]
+    location: { filepath: shared/shared.go }
+  - id: IShape
+    runOn: client
+    typeDef: true
+    location: { filepath: shared/includes.go }
+  - id: Rectangle
+    dependsOn: [AreaRectancle]
+    typeDef: true
+    runOn: client
+    location: { filepath: shared/includes.go }
+  - id: Circle
+    dependsOn: [AreaCircle]
+    typeDef: true
+    runOn: client
+    location: { filepath: shared/includes.go }
+  - id: AreaCircle
+    name: Area
+    dependsOn: [Circle]
+    runOn: client
+    location: { filepath: shared/includes.go }
+    libs: [mathematics math]
+  - id: AreaRectancle
+    name: Area
+    dependsOn: [Rectangle]
+    runOn: client
+    location: { filepath: shared/includes.go }
+  - id: getArea
+    dependsOn: [IShape, Rectangle, Circle]
+    runOn: client
+    location: { filepath: shared/includes.go }
+  - id: CalcArea
+    dependsOn: [IShape, Rectangle, Circle, getArea]
+    runOn: client
+    location: { filepath: shared/shared.go }

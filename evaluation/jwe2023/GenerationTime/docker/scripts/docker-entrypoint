@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# optional parameter
+command="${1}"
+
+# install only when starting container
+if [ "$command" == "dev" ] ; then
+  npm i -g @types/node  && \
+  cd /usr/app/webserver && \
+  go mod download       && \
+  go install            && \
+  cd -                  && \
+  bash
+fi

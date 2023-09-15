@@ -1,0 +1,24 @@
+fragments:
+  - id: fibonacciSequence
+    location: { filepath: shared/evaluation.go }
+  - id: Fibonacci
+    runOn: client
+    dependsOn: [fibonacciSequence]
+    location: { filepath: shared/evaluation.go }
+  - id: Add
+    runOn: client
+    location: { filepath: shared/evaluation.go }
+  - id: CalcDiscount
+    runOn: client
+    location: { filepath: shared/evaluation.go }
+  - id: IncrementNumber
+    runOn: client
+    location: { filepath: shared/evaluation.go }
+  - id: GetHash
+    runOn: client
+    libs: [crypto/sha256, encoding/hex]
+    location: { filepath: shared/evaluation.go }
+#  - id: WasmStartupTime
+#    runOn: server
+#    libs: [time]
+#    location: { filepath: shared/evaluation.go }

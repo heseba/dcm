@@ -1,8 +1,8 @@
-ARG GO_VER=1.19.0-bullseye
+ARG GO_VER=1.21.1-bookworm
 
-FROM golang:$GO_VER
+FROM golang:$GO_VER AS setup
 LABEL autodelete="true"
-LABEL maintainer="Alexander Senger<senger.alexander@yahoo.de>"
+LABEL maintainer="Sebastian Heil<sebastian.heil@informatik.tu-chemnitz.de>"
 
 # USER root
 
@@ -19,7 +19,7 @@ ARG GROUP=wasm
 ARG UID=1000
 ARG GID=1000
 ############# Node
-ARG NODE_VER=16.17.0
+ARG NODE_VER=20.6.0
 ARG NODE_PACKAGE=node-v$NODE_VER-linux-x64
 ARG NODE_HOME=/opt/$NODE_PACKAGE
 
@@ -39,7 +39,7 @@ ENV PATH $NODE_HOME/bin:$PATH
 RUN apt-get update \
   && apt-get install -y --no-install-recommends make curl \
   && curl https://nodejs.org/dist/v$NODE_VER/$NODE_PACKAGE.tar.gz | tar -xzC /opt/ \
-  && npm i -g npm@latest js-yaml \
+  && npm i -g npm@9 js-yaml \
   && rm -rf /var/lib/apt/lists/*
 
 ######################################## Image hardening or User creation
@@ -48,6 +48,8 @@ RUN groupadd -g $GID $GROUP \
   && useradd -m -g $GID -u $UID $USER
 
 ######################################## Setup directories
+
+FROM setup AS addcode
 
 COPY ./docker/wasmbuilder $APP_DIR
 # RUN chmod a+x /usr/local/bin/*
@@ -59,7 +61,9 @@ RUN docker-entrypoint \
   && rm -f /usr/local/bin/docker-entrypoint \
   && rm -rf /go/src/goparser \
   && chown -R $USER:$GROUP /go/pkg \
-  && chown -R $USER:$GROUP $NODE_PATH
+  && chown -R $USER:$GROUP $NODE_PATH \
+  && chmod 777 /usr/local/bin/wasmbuilder \
+  && chmod 777 /usr/local/bin/wasmcompiler
 
 USER $USER
 # directory when starting a container, also creates it

@@ -1,7 +1,7 @@
 {
   "name": "wasm-builder",
-  "version": "0.0.15",
-  "author": "Alexander Senger",
+  "version": "0.0.16",
+  "author": "Sebastian Heil",
   "description": "Generates temporary GO files which can be compiled to WASM and Go plugins. Reads the JSON export from the GoParser and filters all data fragments which are mentioned in the Code-Fragment-Description (CFD) into a data structure. The data structure is used to assemble a GO file for each function and their dependencies. Updates all new or missing attributes of the CFD.",
   "main": "./index.js",
   "type": "commonjs",

@@ -27,6 +27,26 @@ class CommandLine {
       params: ['-e', '--export'],
       description: 'default: ./tmp',
     },
+    functionspath: {
+      label: 'The js functions file generated, which handle the calls to the codeDistributor',
+      params: ['--functionspath'],
+      description: 'default: ./tmp',
+    },
+    wspath: {
+      label: 'The endpoint for the web socket, specified within the functions file',
+      params: ['--wspath'],
+      description: 'default: /ws',
+    },
+    apipath: {
+      label: 'The endpoint for the API, specified within the functions file',
+      params: ['--apipath'],
+      description: 'default: /api/v1',
+    },
+    maxreconnects: {
+      label: 'The maximum number of reconnection attempts for the web socket, specified within the functions file',
+      params: ['--maxreconnects'],
+      description: 'default: 3',
+    },
   };
 
   /**

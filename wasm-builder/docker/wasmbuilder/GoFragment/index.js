@@ -13,6 +13,7 @@ class GoFragment {
   constructor(dataFragment) {
     this.id = dataFragment.id;
     this.name = dataFragment.name;
+    this.fragment_name = dataFragment.fragment_name;
     this.runOn = dataFragment.runOn;
     /** @type {string[]} */
     this.libs = Utils.cloneList(dataFragment.libs);

@@ -5,8 +5,8 @@ services:
       context: .
       # passing to Dockerfile
       args:
-        - GO_VER=${GO_VER:-1.19.0-bullseye}
-        - NODE_VER=${NODE_VER:-16.17.0}
+        - GO_VER=${GO_VER:-1.21.1-bookworm}
+        - NODE_VER=${NODE_VER:-20.6.0}
         - APP_DIR=$APP_DIR
         - GOPARSEREXPORT=$GOPARSEREXPORT
         - GOTEMP=$GOTEMP
@@ -17,8 +17,8 @@ services:
       context: .
       # passing to Dockerfile
       args:
-        - GO_VER=${GO_VER:-1.19.0-bullseye}
-        - NODE_VER=${NODE_VER:-16.17.0}
+        - GO_VER=${GO_VER:-1.21.1-bookworm}
+        - NODE_VER=${NODE_VER:-20.6.0}
         - APP_DIR=$APP_DIR
         - GOPARSEREXPORT=$GOPARSEREXPORT
         - GOTEMP=$GOTEMP
@@ -29,8 +29,8 @@ services:
       context: .
       # passing to Dockerfile
       args:
-        - GO_VER=${GO_VER:-1.19.0-bullseye}
-        - NODE_VER=${NODE_VER:-16.17.0}
+        - GO_VER=${GO_VER:-1.21.1-bookworm}
+        - NODE_VER=${NODE_VER:-20.6.0}
         - APP_DIR=$APP_DIR
         - GOPARSEREXPORT=$GOPARSEREXPORT
         - GOTEMP=$GOTEMP

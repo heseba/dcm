@@ -1,7 +1,7 @@
 'use strict';
 
 import MultistepForm from './MultistepForm.js';
-import { codeDistributor } from './initCodeDistributor.js';
+import { ValidateCouponInput, ValidateCoupon } from './CodeDistributor/functions.js';
 import { selectElement, selectElements } from './utils/helpers.js';
 
 export default class CouponForm {
@@ -94,11 +94,7 @@ export default class CouponForm {
 
   #validateInput = async () => {
     try {
-      const { returnValue0, returnValue1: err } = await codeDistributor.call(
-        11,
-        'ValidateCouponInput',
-        this.input.value
-      );
+        const { returnValue0, returnValue1: err } = await ValidateCouponInput(this.input.value)
 
       if (returnValue0 === false) {
         this.input.focus();
@@ -118,11 +114,7 @@ export default class CouponForm {
 
   #validateCoupon = async () => {
     try {
-      const valid = await codeDistributor.call(
-        13,
-        'ValidateCoupon',
-        this.input.value
-      );
+        const valid = await ValidateCoupon(this.input.value)
 
       if (!valid) {
         return [valid, 'Ungültiger Coupon'];

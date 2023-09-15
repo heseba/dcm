@@ -3,7 +3,7 @@
 import { convertHtmlStringToElement, euro } from '../utils/helpers.js';
 import Table from './index.js';
 import { createTableFooterHTMLTemplate } from '../utils/tableFooterTemplate.js';
-import { codeDistributor } from '../initCodeDistributor.js';
+import { CalcDiscount, RoundFloat, AddFloats } from '../CodeDistributor/functions.js';
 
 export default class SummaryTable extends Table {
   /**
@@ -44,17 +44,8 @@ export default class SummaryTable extends Table {
 
     if (this.isCouponActive) {
       // toFixed returns a string => convert with +
-      const discountValue = await codeDistributor.call(
-        15,
-        'CalcDiscount',
-        this.total.value,
-        15.0
-      );
-      const discountValuePrecisionTwo = await codeDistributor.call(
-        16,
-        'RoundFloat',
-        discountValue
-      );
+      const discountValue = await CalcDiscount(this.total.value, 15.0)
+      const discountValuePrecisionTwo = await RoundFloat(discountValue)
 
       totalValues.push(-discountValuePrecisionTwo);
 
@@ -82,7 +73,7 @@ export default class SummaryTable extends Table {
       })
     );
 
-    const total = await codeDistributor.call(10, 'AddFloats', ...totalValues);
+    const total = await AddFloats(...totalValues)
 
     this.tableBody.append(...rows);
 

@@ -1,0 +1,24 @@
+{{ define "page" }}
+<main id="main-content">
+  <h1>Evaluation</h1>
+  <p>Results will be printed in the browser console.</p>
+  <p>
+    Measurements were made with the JavaScript
+    <a
+      href="https://developer.mozilla.org/en-US/docs/Web/API/Performance/now"
+      target="_blank"
+      >performance API</a
+    >.
+  </p>
+  <div id="part-calc">
+    <h2>Run Calculations</h2>
+    <p>
+      Measures the time to run 5 fragment calls in sequence, with the result of each call forming the input of the next one.
+    </p>
+    <br />
+    <p>
+      By pressing the button a 100 iterations will be triggered, and executed with the current configuration. The <em>Decision System Emulator</em> extension can be used to change the execution location of fragments between runs.
+    </p>
+  </div>
+</main>
+{{- end }}

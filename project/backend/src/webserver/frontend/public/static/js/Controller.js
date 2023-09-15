@@ -5,7 +5,7 @@ import CartItem from './Cart/CartItem.js';
 import CartTable from './Table/CartTable.js';
 import MultistepForm from './MultistepForm.js';
 import ProductCatalog from './ProductCatalog/index.js';
-import { codeDistributor } from './initCodeDistributor.js';
+import { IncrementNumber } from './CodeDistributor/functions.js';
 
 import {
   isUndefined,
@@ -105,11 +105,7 @@ export default class Controller {
 
     let cartItem = this.cart.getProductById(product.id);
     if (!isUndefined(cartItem)) {
-      let quantity = await codeDistributor.call(
-        8,
-        'IncrementNumber',
-        cartItem.quantity
-      );
+        let quantity = await IncrementNumber(cartItem.quantity)
 
       // Fallback error handling
       if (typeof quantity === 'undefined') quantity = cartItem.quantity + 1;

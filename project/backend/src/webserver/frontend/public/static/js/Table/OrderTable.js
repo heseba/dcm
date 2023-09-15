@@ -3,7 +3,7 @@
 import { convertHtmlStringToElement, euro } from '../utils/helpers.js';
 import Table from './index.js';
 import { createTableFooterHTMLTemplate } from '../utils/tableFooterTemplate.js';
-import { codeDistributor } from '../initCodeDistributor.js';
+import { AddFloats } from '../CodeDistributor/functions.js';
 import MultistepForm from '../MultistepForm.js';
 
 export default class OrderTable extends Table {
@@ -35,12 +35,7 @@ export default class OrderTable extends Table {
 
     for (const product of products) {
       rows.push(this.createTableRow(product, { shouldAppend: false }));
-      total = await codeDistributor.call(
-        10,
-        'AddFloats',
-        product.totalValue,
-        total
-      );
+      total = await AddFloats(product.totalValue, total)
     }
 
     this.tableBody.append(...rows);

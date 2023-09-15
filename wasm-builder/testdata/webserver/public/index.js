@@ -72,21 +72,21 @@ const runWasm = async (wasmPath, funcName, ...funcParams) => {
 
 async function tests() {
   let result = undefined;
-  result = await runWasm('wasm/0_Add.wasm', 'Add', 1, 2);
+  result = await runWasm('wasm/1_Add.wasm', 'Add', 1, 2);
   console.log(result);
-  result = await runWasm('wasm/1_Sub.wasm', 'Sub', [2, 1]);
+  result = await runWasm('wasm/2_Sub.wasm', 'Sub', [2, 1]);
   console.log(result);
-  result = await runWasm('wasm/4_MultiplyByTwo.wasm', 'MultiplyByTwo', 5);
+  result = await runWasm('wasm/5_MultiplyByTwo.wasm', 'MultiplyByTwo', 5);
   console.log(result);
-  result = await runWasm('wasm/6_GetHash.wasm', 'GetHash', 'WASM');
+  result = await runWasm('wasm/7_GetHash.wasm', 'GetHash', 'WASM');
   console.log(result);
-  result = await runWasm('wasm/7_FuncFunction.wasm', 'FuncFunction', 6);
+  result = await runWasm('wasm/8_FuncFunction.wasm', 'FuncFunction', 6);
   console.log(result);
-  result = await runWasm('wasm/8_BoolFunction.wasm', 'BoolFunction', false);
+  result = await runWasm('wasm/9_BoolFunction.wasm', 'BoolFunction', false);
   console.log(result);
-  result = await runWasm('wasm/9_Pythagoras.wasm', 'Pythagoras', [2, 3]);
+  result = await runWasm('wasm/10_Pythagoras.wasm', 'Pythagoras', [2, 3]);
   console.log(result);
-  result = await runWasm('wasm/10_SumArray.wasm', 'SumArray', [
+  result = await runWasm('wasm/11_SumArray.wasm', 'SumArray', [
     [1, 2],
     [3, 4],
     5,
@@ -98,7 +98,7 @@ async function tests() {
     [1e3, 5, 2, 1, 2, 2, 5, 5]
   );
   console.log(result);
-  result = await runWasm('wasm/12_ExternalVariable.wasm', 'ExternalVariable');
+  result = await runWasm('wasm/13_ExternalVariable.wasm', 'ExternalVariable');
   console.log(result);
   result = await runWasm(
     'wasm/21_CreatingEmployee.wasm',
@@ -123,7 +123,7 @@ async function tests() {
     ['drawing']
   );
   console.log(result);
-  result = await runWasm('wasm/25_ObjectInArray.wasm', 'ObjectInArray', [
+  result = await runWasm('wasm/26_ObjectInArray.wasm', 'ObjectInArray', [
     [
       { Name: 'Andrew', Age: 34 },
       { Name: 'Eugen', Age: 22 },
@@ -131,15 +131,15 @@ async function tests() {
     4,
   ]);
   console.log(result);
-  result = await runWasm('wasm/26_ModifyMap.wasm', 'ModifyMap', {
+  result = await runWasm('wasm/27_ModifyMap.wasm', 'ModifyMap', {
     transport: 30,
     food: 300,
     rent: 100,
   });
   console.log(result);
-  result = await runWasm('wasm/27_ReturnError.wasm', 'ReturnError');
+  result = await runWasm('wasm/28_ReturnError.wasm', 'ReturnError');
   console.log(result);
-  result = await runWasm('wasm/37_CalcArea.wasm', 'CalcArea');
+  result = await runWasm('wasm/38_CalcArea.wasm', 'CalcArea');
   console.log(result);
 
   const startTime = +new Date();

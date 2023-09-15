@@ -1,0 +1,38 @@
+@use "sass:map";
+@use "sass:color";
+@use "sass:math";
+
+@use "../utils/breakpoints" as *;
+@use "../utils/colors" as clr;
+@use "../utils/extends";
+
+main {
+  padding-bottom: 3rem;
+}
+
+.preload * {
+  transition: none !important;
+  -webkit-transition: none !important;
+  -moz-transition: none !important;
+  -ms-transition: none !important;
+  -o-transition: none !important;
+}
+
+#skip-navigation {
+  position: fixed;
+  top: -100%;
+  left: 10px;
+  transform: translateY(-100%);
+  background-color: clr.$brown;
+  border: 3px solid clr.$brown;
+  color: white;
+  text-decoration: none;
+  padding: 14px;
+  transition: transform 250ms ease;
+  z-index: 2;
+
+  &:focus {
+    top: 0;
+    transform: translateY(0);
+  }
+}

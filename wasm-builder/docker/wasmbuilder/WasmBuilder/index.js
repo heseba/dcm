@@ -5,6 +5,7 @@ const dataFragmentList = require('../FragmentList/DataFragmentList');
 const goFragmentList = require('../FragmentList/GoFragmentList');
 const FileSystem = require('../utils/FileSystem');
 const Comparer = require('../utils/Comparer');
+const CFDPreprocessor = require('../utils/CFDPreprocessor');
 const CFDValidator = require('../utils/CFDValidator');
 const DataFragment = require('../DataFragment');
 const GoFragmentGlobalVariable = require('../GoFragment/GoFragmentGlobalVariable');
@@ -28,6 +29,10 @@ class WasmBuilder {
   #pluginTempPath = '';
   #goTempPath = '';
   #goParserExportPath = '';
+  #functionsPath = '';
+  #wsPath = '';
+  #apiPath = '';
+  #maxReconnectAttempts = '';
   /** @type {YamlDoc|undefined} */
   #cfdDocument = undefined;
   /** @type {YamlDoc|undefined} */
@@ -38,9 +43,13 @@ class WasmBuilder {
    * @param {string} cfdPath
    * @param {string} goOutputPath
    */
-  constructor(cfdPath, pluginTempPath, goOutputPath, goParserExportPath) {
+  constructor(cfdPath, pluginTempPath, goOutputPath, goParserExportPath, functionsPath, wsPath, apiPath, maxReconnectAttempts) {
     this.#cfdPath = cfdPath;
     this.#pluginTempPath = pluginTempPath;
+    this.#functionsPath = functionsPath;
+    this.#wsPath = wsPath;
+    this.#apiPath = apiPath;
+    this.#maxReconnectAttempts = maxReconnectAttempts;
     this.#goTempPath = goOutputPath;
     this.#goParserExportPath = goParserExportPath;
     this.#cfdDocument = FileSystem.loadCfdFile(cfdPath);
@@ -57,10 +66,20 @@ class WasmBuilder {
    * Creates GO function strings, generates the GO file structure and creates the files.
    */
   build = () => {
+    const cfdPreprocessor = new CFDPreprocessor(this.#cfdDocument);
     const cfdValidator = new CFDValidator(this.#cfdDocument);
-    if (!cfdValidator.validate()) {
+    let maxId = 0;
+    let updateMaxId = (newId) => {maxId = newId};
+
+    if (!cfdValidator.validate(maxId, updateMaxId)) {
       process.exit(1);
     }
+
+    if (!cfdPreprocessor.preprocess()) {
+      process.exit(1);
+    }
+
+    this.#cfdDocumentCopy = Utils.cloneObject(this.#cfdDocument);
 
     // create fragmentCode snippets and fill the goFragmentList
     // NOTE we need each fragmentCode string first to reference them as dependency later when we create the header section
@@ -70,7 +89,7 @@ class WasmBuilder {
       )) {
         // reading from CFD YAML
         const dataFragment = new DataFragment(yamlData, this.#cfdPath);
-        dataFragment.update(this.#goParserExportPath);
+        dataFragment.update(this.#goParserExportPath, maxId );
 
         if (this.#isIdInUse(dataFragment)) {
           process.exit(1);
@@ -120,6 +139,17 @@ class WasmBuilder {
    * Generate the WASMGoCode, PluginGoCode und create files
    */
   #generateCodeAndFiles = () => {
+    let snippets = [`import CodeDistributor from './index.js';
+
+const codeDistributor = new CodeDistributor({
+  moduleDir: './CodeDistributor',
+  wasmDir: './CodeDistributor/wasm',
+  // host: '127.0.0.1:5005',
+  wsPath: '${this.#wsPath}',
+  apiPath: '${this.#apiPath}',
+  maxReconnectAttempts: ${this.#maxReconnectAttempts},
+});`];
+    let funcs = [];
     for (const goFragment of goFragmentList.list) {
       // we only create files of exported functions that we want to use
       // interfaces cannot be called directly like regular functions, they belong to an object
@@ -143,7 +173,18 @@ class WasmBuilder {
         FileSystem.createGoFile(goFragment, this.#goTempPath, 'wasm');
         FileSystem.createGoFile(goFragment, this.#pluginTempPath, 'plugin');
       }
+      funcs.push(goFragment.name)
+      snippets.push(`const ${goFragment.fragment_name} = async (...args) => {
+  return codeDistributor.call({
+    wasmId: ${goFragment.id},
+    wasmFunc: '${goFragment.fragment_name}',
+    wasmParams: args,
+  });
+}`);
     }
+    snippets.push(`export { ${funcs.join(", ")} }`)
+    FileSystem.createJSFile(snippets.join("\n\n"), this.#functionsPath, 'functions')
+    console.log(`Wrote functions file to '${this.#functionsPath}'`)
   };
 }
 

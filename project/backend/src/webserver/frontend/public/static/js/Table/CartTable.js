@@ -7,7 +7,7 @@ import {
   stringToNumber,
 } from '../utils/helpers.js';
 import { createTableRowHTMLTemplate } from '../utils/tableRowTemplate.js';
-import { codeDistributor } from '../initCodeDistributor.js';
+import { IncrementNumber, DecrementNumber } from '../CodeDistributor/functions.js';
 import Table from './index.js';
 import Controller from '../Controller.js';
 import Filter from './TableFilter.js';
@@ -140,7 +140,7 @@ export default class CartTable extends Table {
     const productId = input.id.split('-').splice(1).join('-');
 
     let quantity = stringToNumber(input.value);
-    quantity = await codeDistributor.call(8, 'IncrementNumber', quantity);
+    quantity = await IncrementNumber(quantity)
 
     // Fallback error handling
     if (typeof quantity === 'undefined')
@@ -153,7 +153,7 @@ export default class CartTable extends Table {
     const productId = input.id.split('-').splice(1).join('-');
 
     let quantity = stringToNumber(input.value);
-    quantity = await codeDistributor.call(9, 'DecrementNumber', quantity);
+    quantity = await DecrementNumber(quantity)
 
     // Fallback error handling
     if (typeof quantity === 'undefined')

@@ -1,0 +1,32 @@
+version: '3'
+services:
+  dev:
+    image: $IMAGE_NAME:0.0.16
+    user: root
+    env_file: project.env
+    container_name: wasm-builder-eval
+    working_dir: /usr/app
+    environment:
+      - HOST=$HOST
+      - SERVERPORT=$SERVERPORT
+    ports:
+      - $SERVERPORT:$SERVERPORT
+    volumes:
+      - ./docker/scripts:/usr/local/bin
+      - ./testdata:/usr/app
+    stdin_open: true
+    tty: true
+    command: docker-entrypoint dev
+  build-wasm:
+    environment:
+      - CFD=./terraform/CFD.yaml
+      - WWW=./terraform/www
+      - PLUGINS=./terraform/plugins
+      - FUNCTIONS=./terraform/www
+    image: sebastianheil/wasm-builder:0.0.16
+    working_dir: /usr/app
+    volumes:
+      - ./testdata:/usr/app
+    entrypoint: wasmbuilder
+    command: all
+

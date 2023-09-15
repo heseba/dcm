@@ -51,6 +51,17 @@ class FileSystem {
     // }
   };
 
+  static createJSFile = async (content, dirPath, filename) => {
+    await this.createDirectory(dirPath, { recursive: true });
+    fs.writeFile(
+      path.join(dirPath, `${filename}.js`),
+      content,
+      (err) => {
+        if (err) throw err;
+      }
+    );
+  };
+
   /**
    * Creates a directory of a given path. Program waits until this is done. Will skip if directory already exists.
    *

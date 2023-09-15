@@ -1,0 +1,69 @@
+{
+  "folders": [
+    {
+      "path": ".",
+      "name": "Project"
+    },
+    {
+      "path": "./testdata/webserver",
+      "name": "Webserver"
+    }
+  ],
+  "settings": {
+    "search.exclude": {
+      "**/node_modules": true,
+      "**/*.min.*": true,
+      "**/.DS_Store": true,
+      "**/.git": true
+    },
+
+    "prettier.singleQuote": true,
+    "prettier.trailingComma": "all"
+  },
+
+  "tasks": {
+    "version": "2.0.0",
+    "tasks": [
+      {
+        "label": "createExport",
+        "type": "process",
+        "command": "goparser",
+        "presentation": {
+          "reveal": "never",
+          "echo": true,
+          "revealProblems": "onProblem",
+          "focus": false
+        },
+        "args": [
+          "--path",
+          "${workspaceFolder:Webserver}",
+          "--output",
+          "/tmp",
+          "-m"
+        ],
+        "group": {
+          "kind": "build",
+          "isDefault": false // runs it automatically if true when CTRL+SHIFT+B
+        }
+      },
+      {
+        "label": "launch Project",
+        "type": "shell",
+        "command": "wasmbuilder",
+        "options": {
+          "cwd": "/usr/app"
+        },
+        "presentation": {
+          "reveal": "never",
+          "echo": true,
+          "revealProblems": "onProblem",
+          "focus": false
+        },
+        "group": {
+          "kind": "build",
+          "isDefault": false // runs it automatically if true when CTRL+SHIFT+B
+        }
+      }
+    ]
+  }
+}

@@ -1,5 +1,5 @@
 import CartItem from '../Cart/CartItem.js';
-import { codeDistributor } from '../initCodeDistributor.js';
+import { SortStrings, SortFloats } from '../CodeDistributor/functions.js';
 import {
   selectElement,
   selectElements,
@@ -180,19 +180,9 @@ export default class Filter {
 
     // strings
     if (typeof filtered[0] === 'string') {
-      filtered = await codeDistributor.call(
-        6,
-        'SortStrings',
-        sortMode,
-        filtered
-      );
+        filtered = await SortStrings(sortMode, filtered)
     } else {
-      filtered = await codeDistributor.call(
-        7,
-        'SortFloats',
-        sortMode,
-        filtered
-      );
+        filtered = await SortFloats(sortMode, filtered)
     }
 
     let sorted = [];

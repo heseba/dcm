@@ -1,192 +1,155 @@
 fragments:
-  - id: 0
-    name: Add
+  - id: Add
     runOn: client
     location: { filepath: shared/shared.go }
-  - id: 1
-    name: Sub
+  - id: Sub
     runOn: client
     location: { filepath: shared/shared.go }
-  - id: 2
-    name: Mul
+  - id: Mul
     runOn: client
     location: { filepath: shared/shared.go }
-  - id: 3
-    name: Div
+  - id: Div
     runOn: client
     libs: [fmt]
     location: { filepath: shared/shared.go }
-  - id: 4
-    name: MultiplyByTwo
+  - id: MultiplyByTwo
     runOn: client
     location: { filepath: shared/shared.go }
-    dependsOn: [5]
-  - id: 5
-    name: getNumberTwo
+    dependsOn: [getNumberTwo]
+  - id: getNumberTwo
     location: { filepath: shared/shared.go }
-  - id: 6
-    name: GetHash
+  - id: GetHash
     runOn: client
     location: { filepath: shared/shared.go }
     libs: [crypto/sha256, encoding/hex]
-  - id: 7
-    name: FuncFunction
+  - id: FuncFunction
     runOn: client
     location: { filepath: shared/shared.go }
-  - id: 8
-    name: BoolFunction
+  - id: BoolFunction
     runOn: client
     location: { filepath: shared/shared.go }
-  - id: 9
-    name: Pythagoras
+  - id: Pythagoras
     runOn: client
     location: { filepath: shared/shared.go }
     libs: [math]
-  - id: 10
-    name: SumArray
+  - id: SumArray
     runOn: client
     location: { filepath: shared/shared.go }
-  - id: 11
-    name: VariadicFunction
+  - id: VariadicFunction
     runOn: client
     location: { filepath: shared/shared.go }
-  - id: 12
-    name: ExternalVariable
+  - id: ExternalVariable
     runOn: client
     location: { filepath: shared/shared.go }
-    dependsOn: [13, 14, 15, 16, 17, 18, 19]
-  - id: 13
-    name: NumberFive5
+    dependsOn: [NumberFive5, NumberSix, NumberSeven, NumberEight, NumberNine, NumberTen, MyObj]
+  - id: NumberFive5
     runOn: client
     location: { filepath: shared/includes.go }
     globalVar: true
-  - id: 14
-    name: NumberSix
+  - id: NumberSix
     runOn: client
     location: { filepath: shared/includes.go }
     globalVar: true
-  - id: 15
-    name: NumberSeven
+  - id: NumberSeven
     runOn: client
     location: { filepath: shared/includes.go }
     globalVar: true
-  - id: 16
-    name: NumberEight
+  - id: NumberEight
     runOn: client
     location: { filepath: shared/includes.go }
     globalVar: true
-  - id: 17
-    name: NumberNine
+  - id: NumberNine
     runOn: client
     location: { filepath: shared/includes.go }
     globalVar: true
-  - id: 18
-    name: NumberTen
+  - id: NumberTen
     runOn: client
     location: { filepath: shared/includes.go }
     globalVar: true
-  - id: 19
-    name: MyObj
+  - id: MyObj
     runOn: client
     location: { filepath: shared/includes.go }
-    dependsOn: [20]
+    dependsOn: [Mentor]
     globalVar: true
-  - id: 20
-    name: Mentor
+  - id: Mentor
     runOn: client
     location: { filepath: shared/includes.go }
     typeDef: true
-  - id: 21
-    name: CreatingEmployee
+  - id: CreatingEmployee
     runOn: client
-    dependsOn: [22, 23]
+    dependsOn: [Employee, Colleague]
     location: { filepath: shared/shared.go }
-  - id: 22
-    name: Employee
+  - id: Employee
     runOn: client
     location: { filepath: shared/includes.go }
     typeDef: true
-  - id: 23
-    name: Colleague
+  - id: Colleague
     runOn: client
     location: { filepath: shared/includes.go }
     typeDef: true
-  - id: 24
-    name: MultiReturn
+  - id: MultiReturn
     runOn: client
-    dependsOn: [22, 23]
+    dependsOn: [Employee, Colleague]
     location: { filepath: shared/shared.go }
-  - id: 25
-    name: ObjectInArray
+  - id: ObjectInArray
     runOn: client
-    dependsOn: [20]
+    dependsOn: [Mentor]
     location: { filepath: shared/shared.go }
-  - id: 26
-    name: ModifyMap
+  - id: ModifyMap
     runOn: client
     location: { filepath: shared/shared.go }
-  - id: 27
-    name: ReturnError
+  - id: ReturnError
     runOn: client
     libs: [errors]
-    dependsOn: [28, 29]
+    dependsOn: [CustomError, Error]
     location: { filepath: shared/shared.go }
-  - id: 28
-    name: CustomError
+  - id: CustomError
     runOn: client
     location: { filepath: shared/includes.go }
     typeDef: true
-  - id: 29
-    name: Error
+  - id: Error
     runOn: client
     libs: [fmt]
-    dependsOn: [28]
+    dependsOn: [CustomError]
     location: { filepath: shared/includes.go }
-  - id: 30
-    name: Check
+  - id: Check
     runOn: client
     libs: [fmt]
     location: { filepath: shared/shared.go }
-  - id: 31
-    name: IShape
+  - id: IShape
     runOn: client
     typeDef: true
     location: { filepath: shared/includes.go }
-  - id: 32
-    name: Rectangle
-    dependsOn: [35]
+  - id: Rectangle
+    dependsOn: [AreaRectangle]
     typeDef: true
     runOn: client
     location: { filepath: shared/includes.go }
-  - id: 33
-    name: Circle
-    dependsOn: [34]
+  - id: Circle
+    dependsOn: [AreaCircle]
     typeDef: true
     runOn: client
     location: { filepath: shared/includes.go }
-  - id: 34
+  - id: AreaCircle
     name: Area
-    dependsOn: [33]
+    dependsOn: [Circle]
     runOn: client
     location: { filepath: shared/includes.go }
     libs: [mathematics math]
-  - id: 35
+  - id: AreaRectangle
     name: Area
-    dependsOn: [32]
+    dependsOn: [Rectangle]
     runOn: client
     location: { filepath: shared/includes.go }
-  - id: 36
-    name: getArea
-    dependsOn: [31, 32, 33]
+  - id: getArea
+    dependsOn: [IShape, Rectangle, Circle]
     runOn: client
     location: { filepath: shared/includes.go }
-  - id: 37
-    name: CalcArea
-    dependsOn: [31, 32, 33, 36]
+  - id: CalcArea
+    dependsOn: [IShape, Rectangle, Circle, getArea]
     runOn: client
     location: { filepath: shared/shared.go }
-  - id: 38
-    name: WasmStartupTime
+  - id: WasmStartupTime
     runOn: client
     libs: [time]
     location: { filepath: shared/shared.go }

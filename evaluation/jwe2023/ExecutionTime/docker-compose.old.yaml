@@ -1,0 +1,51 @@
+version: '3'
+services:
+  go-exec-dev:
+    env_file: go.env
+    image: golang:${GO_VARIANT:-1.21.1-bookworm}
+    working_dir: $DOCKER_GOSRC/webserver
+    environment:
+      - HOST=$HOST
+      - SERVERPORT=${SERVERPORT:-8000}
+    volumes:
+      - $GOSRC:$DOCKER_GOSRC
+    ports:
+      - ${SERVERPORT:-8000}:${SERVERPORT:-8000}
+    container_name: go-exec-dev
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+    command: >       # rather command than entrypoint due to vscode container
+      /bin/bash -c "
+        go mod download &&
+        go install &&
+        bash
+      "
+  go-server:
+    env_file: go.env
+    image: golang:${GO_VARIANT:-1.21.1-bookworm}
+    working_dir: $DOCKER_GOSRC/webserver
+    environment:
+      - HOST=$HOST
+      - SERVERPORT=${SERVERPORT:-8000}
+    volumes:
+      - $GOSRC:$DOCKER_GOSRC
+    ports:
+      - ${SERVERPORT:-8000}:${SERVERPORT:-8000}
+    container_name: go-server
+    entrypoint: bash -c
+    command:
+      - |
+        go install .
+        webserver
+  build-wasm:
+    image: sebastianheil/wasm-builder:0.0.16
+    environment:
+      - CFD=backend/src/webserver/CFD.yaml
+      - WWW=backend/src/webserver/frontend/public/js/CodeDistributor
+      - PLUGINS=backend/src/codedistribution/plugins
+      - FUNCTIONS=backend/src/webserver/frontend/public/static/js/CodeDistributor/
+    working_dir: /usr/app
+    volumes:
+      - .:/usr/app
+    entrypoint: wasmbuilder
+    command: all

@@ -1,0 +1,97 @@
+fragments:
+  - id: onlyFilesFS
+    typeDef: true
+    libs: [net/http]
+    location: { filepath: fs.go }
+  - id: neuteredReaddirFile
+    typeDef: true
+    libs: [net/http]
+    location: { filepath: fs.go }
+  - id: Readdir
+    runOn: client
+    dependsOn: [neuteredReaddirFile]
+    libs: [os]
+    location: { filepath: fs.go }
+  - id: Open
+    runOn: client
+    dependsOn: [onlyFilesFS, Readdir]
+    libs: [net/http]
+    location: { filepath: fs.go }
+  - id: Dir
+    runOn: client
+    dependsOn: [onlyFilesFS, Open]
+    libs: [net/http]
+    location: { filepath: fs.go }
+  - id: DebugMode
+    globalVar: true
+    location: { filepath: mode.go }
+  - id: TestMode
+    globalVar: true
+    location: { filepath: mode.go }
+  - id: ReleaseMode
+    globalVar: true
+    location: { filepath: mode.go }
+  - id: debugCode
+    globalVar: true
+    location: { filepath: mode.go }
+  - id: releaseCode
+    globalVar: true
+    location: { filepath: mode.go }
+  - id: testCode
+    globalVar: true
+    location: { filepath: mode.go }
+  - id: ginMode
+    globalVar: true
+    location: { filepath: mode.go }
+  - id: modeName
+    globalVar: true
+    location: { filepath: mode.go }
+  - id: SetMode
+    runOn: client
+    libs: [flag]
+    dependsOn: [DebugMode, TestMode, ReleaseMode, debugCode, releaseCode, testCode, ginMode, modeName]
+    location: { filepath: mode.go }
+  - id: Mode
+    runOn: client
+    dependsOn: [modeName, DebugMode]
+    location: { filepath: mode.go }
+  - id: IsDebugging
+    runOn: client
+    dependsOn: [ginMode, debugCode]
+    location: { filepath: debug.go }
+  - id: consoleColorModeValue
+    typeDef: true
+    location: { filepath: logger.go }
+  - id: autoColor
+    globalVar: true
+    dependsOn: [consoleColorModeValue]
+    location: { filepath: logger.go }
+  - id: disableColor
+    globalVar: true
+    dependsOn: [consoleColorModeValue]
+    location: { filepath: logger.go }
+  - id: forceColor
+    globalVar: true
+    dependsOn: [consoleColorModeValue]
+    location: { filepath: logger.go }
+  - id: consoleColorMode
+    globalVar: true
+    dependsOn: [autoColor]
+    location: { filepath: logger.go }
+  - id: DisableConsoleColor
+    runOn: client
+    dependsOn: [disableColor, consoleColorMode]
+    location: { filepath: logger.go }
+  - id: ForceConsoleColor
+    runOn: client
+    dependsOn: [forceColor, consoleColorMode]
+    location: { filepath: logger.go }
+  - id: StringToBytes
+    runOn: client
+    libs: [unsafe]
+    location: { filepath: internal/bytesconv/bytesconv_1.19.go }
+  - id: BytesToString
+    runOn: client
+    libs: [unsafe]
+    location: { filepath: internal/bytesconv/bytesconv_1.19.go }
+

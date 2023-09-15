@@ -17,12 +17,15 @@ class DataFragmentUpdater {
   /** @type {DataFragment} */
   #dataFragment = undefined;
 
+  #autoIdCounter = 0;
+
   /**
    *
    * @param {DataFragment} dataFragment
    */
-  constructor(dataFragment, goParserExportPath) {
+  constructor(dataFragment, goParserExportPath, maxId) {
     this.#dataFragment = dataFragment;
+    this.#autoIdCounter = maxId + 1;
 
     let exportPath = lstatSync(goParserExportPath).isDirectory()
       ? path.join(goParserExportPath, 'export.json')
@@ -70,6 +73,12 @@ class DataFragmentUpdater {
       if (Utils.isUndefined(this.#dataFragment.globalVar)) {
         this.#updateTypeDefinitions(goFileData.type_definitions);
       }
+    }
+
+    // automatically assign ids to fragments without id
+    if (this.#dataFragment.id == "auto") {
+      this.#dataFragment.id = this.#autoIdCounter;
+      this.#autoIdCounter++;
     }
 
     // if it's still undefined the GoParser did a mistake or the developer entered wrong values

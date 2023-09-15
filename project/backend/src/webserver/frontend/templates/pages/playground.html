@@ -148,6 +148,52 @@
               </div>
             </fieldset>
           </form>
+          <form>
+            <fieldset>
+              <legend><h2>Test Subtract</h2></legend>
+
+              <div class="form__group">
+                <div class="form__input">
+                  <label for="sub_numberOne">Number 1</label>
+                  <input
+                    type="number"
+                    step="1"
+                    oninput="this.value|=0"
+                    class="no-counter-control"
+                    id="sub_numberOne"
+                    name="Number 1"
+                    required
+                  />
+                </div>
+
+                <div class="form__input">
+                  <label for="sub_numberTwo">Number 2</label>
+                  <input
+                    type="number"
+                    step="1"
+                    oninput="this.value|=0"
+                    class="no-counter-control"
+                    id="sub_numberTwo"
+                    name="Number 2"
+                    required
+                  />
+                </div>
+                <div class="form__input">
+                  <label for="sub_result">Result:</label>
+                  <output id="sub_result"></output>
+                </div>
+              </div>
+              <div class="form__btn-group">
+                <input
+                  type="submit"
+                  value="calculate"
+                  id="sub_calc"
+                  class="btn"
+                />
+                <input type="reset" accesskey="r" value="reset" class="btn" />
+              </div>
+            </fieldset>
+          </form>
         </div>
       </div>
     </main>
