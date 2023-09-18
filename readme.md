@@ -13,10 +13,17 @@ The repository contains the DCM infrastructure implemented in Go, the evaluation
   - `project/backend/src/codedistribution` the DCM runtime infrastructure
   - `project/backend/src/webserver` a sample web shop application showcasing the integration of DCM into web applications
 - `evaluation` the evaluation and data containing
-  - `evaluation/GenerationTime` samples and scripts used for scenario I
-  - `evaluation/NetworkTime` samples and scripts used for scenario II
-  - `evaluation/ExecutionTime` samples and scripts used for scenario III
-  - `evaluation/measurements` the raw evaluation data
+  - `evaluation/icwe2023` the evaluation and data as referenced in "DCM: Dynamic Client-Server Code Migration"
+    - `evaluation/icwe2023/GenerationTime` samples and scripts used for scenario I
+    - `evaluation/icwe2023/NetworkTime` samples and scripts used for scenario II
+    - `evaluation/icwe2023/ExecutionTime` samples and scripts used for scenario III
+    - `evaluation/icwe2023/measurements` the raw evaluation data
+  - `evaluation/jwe2023` the evaluation and data as referenced in "Client-Server Code Mobility at Runtime"
+    - `evaluation/jwe2023/GenerationTime` samples and scripts used for scenario I
+    - `evaluation/jwe2023/NetworkTime` samples and scripts used for scenario II
+    - `evaluation/jwe2023/ExecutionTime` samples and scripts used for scenario III
+    - `evaluation/jwe2023/ComparisonTime` samples and scripts used for scenarion IV
+    - `evaluation/jwe2023/measurements` the raw evaluation data
 
 To enable easy replication, we are using Docker. Follow the instructions below and in the readme files in the subdirectories to try it out yourself.
 

@@ -23,8 +23,8 @@ Libraries with an alias are separated by one space. [alias libpath].
 
 ```yml
 fragments: [array]
-  - id: 0 [int]
-    name: xyz [string]
+  - id: xyz [string]
+    name: zyx [string|optional]
     globalVar: false [boolean|optional]
     typeDef: false [boolean|optional]
     runOn: ("client"|"server") [string|optional]
@@ -36,10 +36,12 @@ fragments: [array]
       - fmt
       - crypto/sha256
       - encoding/hex
-    dependsOn: [array<int>|optional]
-      - 2
-      - 4
+    dependsOn: [array<string>|optional]
+      - foo
+      - bar
 ```
+
+`id` is the unique identifier of the fragment, and is also used as the name of the generated JavaScript function. If the fragment is callable from JavaScript then the ID should meet the requirements of JavaScript function calls. `name` can be specified if the name of the source Go function is different from the ID, or if left unspecified it defaults to the value of `id`.
 
 ## Docker Usage (recommended)
 
@@ -56,11 +58,15 @@ The easiest fix would be to set the container image version of the wasm-builder 
 When using the image, pass these as environment variables.
 The environment variable paths are relative to the path which you mount into the `/usr/app` directory.
 
-| ENV VAR | meaning                            |
-| ------- | ---------------------------------- |
-| CFD     | path to Code-Fragment-Description  |
-| WWW     | path to webserver public directory |
-| PLUGINS | path to codedistributor directory  |
+| ENV VAR       | meaning                              |
+| ------------- | ------------------------------------ |
+| CFD           | path to Code-Fragment-Description    |
+| WWW           | path to webserver public directory   |
+| PLUGINS       | path to codedistributor directory    |
+| FUNCTIONS     | path to webserver js functions file  |
+| WSPATH        | URL prefix of websocket              |
+| APIPATH       | URL prefix of codedistributor API    |
+| MAXRECONNECTS | number of maximum reconnect attempts |
 
 The easiest way is to create a env_file e.g. 'project.env' and pass the file in docker-compose:
 
@@ -79,6 +85,7 @@ services:
       - CFD=path/to/codeFragmentDescription
       - WWW=path/to/public/directory
       - PLUGINS=path/to/codedistribution
+        ...
 ```
 
 **Base docker-compose configuration:**
